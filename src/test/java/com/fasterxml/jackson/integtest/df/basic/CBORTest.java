@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.integtest.df;
+package com.fasterxml.jackson.integtest.df.basic;
 
 import java.util.*;
 
