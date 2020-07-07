@@ -3,12 +3,15 @@ package com.fasterxml.jackson.integtest.df.xml;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class XMLWithJodaTest extends BaseTest
+public class JodaWithXMLTest extends BaseTest
 {
     static class DateTimeWrapper {
         @JsonFormat(shape = JsonFormat.Shape.STRING)
