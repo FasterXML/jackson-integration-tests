@@ -1,0 +1,9 @@
+language: java
+  - openjdk8
+  - oraclejdk11
+
+# whitelist
+branches:
+  only:
+    - master
+    - "2.12"
