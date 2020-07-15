@@ -10,10 +10,11 @@ public class SmileTest extends BaseTest
 {
     public void testSimple() throws Exception
     {
-        ObjectMapper mapper = smileMapper();
-        byte[] smile = mapper.writeValueAsBytes(new HashMap<String,String>());
+        final ObjectMapper mapper = smileMapper();
+        final Map<String, Object> input = Collections.singletonMap("key", Integer.valueOf(1972));
+        byte[] smile = mapper.writeValueAsBytes(input);
 
         Map<?,?> output = mapper.readValue(smile, Map.class);
-        assertEquals(0, output.size());
+        assertEquals(input, output);
     }
 }

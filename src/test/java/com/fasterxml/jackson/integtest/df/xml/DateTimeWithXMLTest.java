@@ -1,5 +1,8 @@
 package com.fasterxml.jackson.integtest.df.xml;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -11,7 +14,7 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class JodaWithXMLTest extends BaseTest
+public class DateTimeWithXMLTest extends BaseTest
 {
     static class DateTimeWrapper {
         @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -22,6 +25,7 @@ public class JodaWithXMLTest extends BaseTest
     }
 
     private final static DateTime TEST_DATETIME = DateTime.parse("1972-12-28T12:00:01.000Z");
+    private final static Calendar TEST_CALENDAR = TEST_DATETIME.toCalendar(Locale.getDefault());
 
     private final ObjectMapper MAPPER = xmlMapperBuilder()
             .addModule(new JodaModule())
@@ -29,7 +33,35 @@ public class JodaWithXMLTest extends BaseTest
 
     /*
     /**********************************************************************
-    /* Test methods
+    /* Test methods, old JDK date/time
+    /**********************************************************************
+     */
+
+    public void testJDKCalendarTextual() throws Exception
+    {
+        CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
+        String doc = MAPPER.writer()
+                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .writeValueAsString(input);
+        CalendarWrapper result = MAPPER.readerFor(CalendarWrapper.class)
+                .readValue(doc);
+        assertEquals(input.cal.getTimeInMillis(), result.cal.getTimeInMillis());
+    }
+
+    public void testJDKCalendarTimestamp() throws Exception
+    {
+        CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
+        String doc = MAPPER.writer()
+                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .writeValueAsString(input);
+        CalendarWrapper result = MAPPER.readerFor(CalendarWrapper.class)
+                .readValue(doc);
+        assertEquals(input.cal.getTimeInMillis(), result.cal.getTimeInMillis());
+    }
+
+    /*
+    /**********************************************************************
+    /* Test methods, Joda
     /**********************************************************************
      */
 

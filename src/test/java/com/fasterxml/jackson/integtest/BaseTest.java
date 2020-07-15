@@ -2,6 +2,7 @@ package com.fasterxml.jackson.integtest;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import junit.framework.TestCase;
 
@@ -30,6 +31,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 public abstract class BaseTest
     extends TestCase
 {
+    protected enum ABC { A, B, C; }
+
     @JsonPropertyOrder({ "x", "y" })
     protected static class PointXY {
         public int x, y;
@@ -53,6 +56,14 @@ public abstract class BaseTest
         }
     }
 
+    protected static class CalendarWrapper {
+        public Calendar cal;
+
+        protected CalendarWrapper() { }
+        public CalendarWrapper(Calendar v) { cal = v; }
+    }
+
+    
     /*
     /**********************************************************
     /* Additional assertion methods

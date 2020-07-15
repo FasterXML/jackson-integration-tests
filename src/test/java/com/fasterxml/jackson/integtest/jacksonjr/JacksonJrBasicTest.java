@@ -19,8 +19,6 @@ public class JacksonJrBasicTest extends BaseTest
         public NameBean getName() { return name; }
     }
 
-    protected enum ABC { A, B, C; }
-
     protected static class NameBean {
         protected String first, last;
 
@@ -144,5 +142,4 @@ public class JacksonJrBasicTest extends BaseTest
             verifyException(e, "(known properties: [\"first\", \"last\"])");
         }
     }
-    
 }
