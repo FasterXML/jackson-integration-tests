@@ -1,20 +1,18 @@
-package com.fasterxml.jackson.integtest.df.xml;
+package com.fasterxml.jackson.integtest.df.csv;
 
 import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class JodaWithXMLTest extends BaseTest
+public class JodaWithCSVTest extends BaseTest
 {
     static class DateTimeWrapper {
-        @JsonFormat(shape = JsonFormat.Shape.STRING)
         public DateTime dt;
 
         protected DateTimeWrapper() { }
@@ -23,42 +21,43 @@ public class JodaWithXMLTest extends BaseTest
 
     private final static DateTime TEST_DATETIME = DateTime.parse("1972-12-28T12:00:01.000Z");
 
-    private final ObjectMapper MAPPER = xmlMapperBuilder()
+    private final CsvMapper MAPPER = csvMapperBuilder()
             .addModule(new JodaModule())
             .build();
 
+    private final CsvSchema WRAPPER_SCHEMA = MAPPER.schemaFor(DateTimeWrapper.class);
+    
     /*
     /**********************************************************************
     /* Test methods
     /**********************************************************************
      */
 
-    public void testJodaDateTimeWrapperTextual() throws Exception
+    public void testJodaDateTimeTextual() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
-        String xml = MAPPER.writer()
-                .writeValueAsString(input);
-        DateTimeWrapper result = MAPPER.readValue(xml, DateTimeWrapper.class);
-        assertEquals(input.dt, result.dt);
-    }
-
-    public void testJodaRootDateTimeTextual() throws Exception
-    {
-        String xml = MAPPER.writer()
+        String doc = MAPPER.writer(WRAPPER_SCHEMA)
                 .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .writeValueAsString(TEST_DATETIME);
-        DateTime result = MAPPER.readValue(xml, DateTime.class);
-        assertEquals(TEST_DATETIME, result);
+                .writeValueAsString(input);
+        DateTimeWrapper result = MAPPER.readerFor(DateTimeWrapper.class)
+                .with(WRAPPER_SCHEMA)
+                .readValue(doc);
+        assertEquals(input.dt, result.dt);
     }
 
     // 06-Jul-2020, tatu: Does not yet work, need some TLC on Joda
     /*
-    public void testJodaRootDateTimeNumeric() throws Exception
+    public void testJodaDateTimeNumeric() throws Exception
     {
-        String xml = MAPPER.writer()
+        String doc = MAPPER.writer(WRAPPER_SCHEMA)
                 .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(TEST_DATETIME);
-        DateTime result = MAPPER.readValue(xml, DateTime.class);
+        DateTime result = null;
+        try {
+            result = MAPPER.readValue(doc, DateTime.class);
+        } catch (Exception e) {
+            fail("Failed with `"+e.getClass().getName()+"`, with input of:\n"+doc);
+        }
         assertEquals(TEST_DATETIME, result);
     }
     */
