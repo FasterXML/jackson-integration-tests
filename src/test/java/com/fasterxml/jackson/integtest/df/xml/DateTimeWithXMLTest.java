@@ -83,8 +83,6 @@ public class DateTimeWithXMLTest extends BaseTest
         assertEquals(TEST_DATETIME, result);
     }
 
-    // 06-Jul-2020, tatu: Does not yet work, need some TLC on Joda
-    /*
     public void testJodaRootDateTimeNumeric() throws Exception
     {
         String xml = MAPPER.writer()
@@ -93,5 +91,4 @@ public class DateTimeWithXMLTest extends BaseTest
         DateTime result = MAPPER.readValue(xml, DateTime.class);
         assertEquals(TEST_DATETIME, result);
     }
-    */
 }

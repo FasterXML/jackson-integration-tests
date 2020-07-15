@@ -86,8 +86,6 @@ public class DateTimeWithCSVTest extends BaseTest
         assertEquals(input.dt, result.dt);
     }
 
-    // 06-Jul-2020, tatu: Does not yet work, need some TLC on Joda
-    /*
     public void testJodaDateTimeTimestamp() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
@@ -105,5 +103,4 @@ public class DateTimeWithCSVTest extends BaseTest
         }
         assertEquals(TEST_DATETIME, result.dt);
     }
-    */
 }

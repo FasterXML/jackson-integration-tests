@@ -4,7 +4,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Instant;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
@@ -23,7 +29,15 @@ public class DateTimeWithPropsTest extends BaseTest
     }
 
     private final static DateTime TEST_DATETIME = DateTime.parse("1972-12-28T12:00:01.000Z");
+    private final static long TEST_TIMESTAMP = TEST_DATETIME.getMillis();
     private final static Calendar TEST_CALENDAR = TEST_DATETIME.toCalendar(Locale.getDefault());
+
+    static class XxxWrapper<X> {
+        public X value;
+
+        public XxxWrapper(X v) { value = v; }
+        protected XxxWrapper() { value = null; }
+    }
 
     private final JavaPropsMapper MAPPER = propsMapperBuilder()
             .addModule(new JodaModule())
@@ -74,8 +88,6 @@ public class DateTimeWithPropsTest extends BaseTest
         assertEquals(input.dt, result.dt);
     }
 
-    // 06-Jul-2020, tatu: Does not yet work, need some TLC on Joda
-    /*
     public void testJodaDateTimeNumeric() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
@@ -91,5 +103,47 @@ public class DateTimeWithPropsTest extends BaseTest
         }
         assertEquals(TEST_DATETIME, result.dt);
     }
-    */
+
+    // // // And then a wider set of things
+
+    @SuppressWarnings("deprecation")
+    public void testJodaDateMidnightNumeric() throws Exception {
+        _testJodaMiscNumeric(org.joda.time.DateMidnight.class,
+                new org.joda.time.DateMidnight(TEST_TIMESTAMP));
+    }
+
+    public void testJodaInstantNumeric() throws Exception {
+        _testJodaMiscNumeric(Instant.class, new Instant(TEST_TIMESTAMP));
+    }
+
+    public void testJodaLocalDateNumeric() throws Exception {
+        _testJodaMiscNumeric(LocalDate.class, new LocalDate(TEST_TIMESTAMP));
+    }
+
+    public void testJodaLocalDateTimeNumeric() throws Exception {
+        // 15-Jul-2020, tatu: Need to force use of UTC, default constructor would
+        //    use local TimeZone
+        _testJodaMiscNumeric(LocalDateTime.class, new LocalDateTime(TEST_TIMESTAMP,  DateTimeZone.UTC));
+    }
+
+    public void testJodaLocalTimeNumeric() throws Exception {
+        _testJodaMiscNumeric(LocalTime.class, new LocalTime(TEST_TIMESTAMP));
+    }
+
+    private <T> void _testJodaMiscNumeric(Class<T> type, T instance) throws Exception
+    {
+        XxxWrapper<T> input = new XxxWrapper<>(instance);
+        String doc = "value: "+TEST_TIMESTAMP;
+        XxxWrapper<T> result = null;
+        JavaType readType = MAPPER.getTypeFactory()
+                .constructParametricType(XxxWrapper.class, type);
+        try {
+            result = MAPPER.readerFor(readType)
+                    .readValue(doc);
+        } catch (Exception e) {
+            fail("Failed with input of:\n"+doc
+                    +"\nproblem: `"+e.getClass().getName()+"`: "+e.getMessage());
+        }
+        assertEquals(input.value, result.value);
+    }
 }
