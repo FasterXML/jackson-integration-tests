@@ -86,6 +86,10 @@
       <groupId>com.fasterxml.jackson.jr</groupId>
       <artifactId>jackson-jr-objects</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jr</groupId>
+      <artifactId>jackson-jr-stree</artifactId>
+    </dependency>
 
     <!-- Also most datatypes -->
     <dependency>
