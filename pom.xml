@@ -93,6 +93,11 @@
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.msgpack</groupId>
+      <artifactId>jackson-dataformat-msgpack</artifactId>
+      <version>0.8.21</version>
+    </dependency>
 
     <!-- Then Jackson-jr -->
     <dependency>
@@ -195,6 +200,10 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <source>10</source>
+          <target>10</target>
+        </configuration>
       </plugin>
     </plugins>
   </build>
