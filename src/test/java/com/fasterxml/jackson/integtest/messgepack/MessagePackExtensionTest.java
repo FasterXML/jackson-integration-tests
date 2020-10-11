@@ -9,6 +9,9 @@ import org.msgpack.jackson.dataformat.MessagePackExtensionType;
 import java.util.List;
 
 public class MessagePackExtensionTest extends BaseTest {
+    /**
+     * https://github.com/FasterXML/jackson-databind/issues/2824
+     */
     public void testPOJONodeWithMessagePackExtensionShouldNotThrowExceptionWhenEvaluate() {
         try {
             final var node = new ArrayNode(new JsonNodeFactory(false), List.of(new POJONode(new MessagePackExtensionType((byte) 0, new byte[]{2}))));
