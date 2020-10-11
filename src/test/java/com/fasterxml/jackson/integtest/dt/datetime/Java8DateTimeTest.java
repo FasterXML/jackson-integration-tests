@@ -71,7 +71,7 @@ public class Java8DateTimeTest extends BaseTest
         String value = MAPPER.writer()
                 .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(date);
-        final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        assertEquals("The value is not correct.", '"' + FORMATTER.format(date) + '"', value);
+        assertEquals("The value is not correct.",
+                q("1970-01-01T00:00:00Z"), value);
     }
 }
