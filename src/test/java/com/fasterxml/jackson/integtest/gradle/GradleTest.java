@@ -65,6 +65,7 @@ public class GradleTest
 
             // Jackson Jr.
             // "com.fasterxml.jackson.jr:jackson-jr-all" does not have the bom dependency, see: https://github.com/FasterXML/jackson-databind/issues/2726#issuecomment-707327060
+            // "com.fasterxml.jackson.jr:jackson-jr-annotation-support" activate when the BOM was published with https://github.com/FasterXML/jackson-bom/pull/35 included
             "com.fasterxml.jackson.jr:jackson-jr-objects",
             "com.fasterxml.jackson.jr:jackson-jr-retrofit2",
             "com.fasterxml.jackson.jr:jackson-jr-stree",
@@ -121,7 +122,7 @@ public class GradleTest
                     "}\n" +
                     "dependencies {\n" +
                     "  constraints {\n" +
-                    "    implementation(\"" + module + ":" + baseVersion + "-" + VERSION_QUALIFIER + "\")\n" +
+                    "    implementation(\"" + module + ":" + VERSION_QUALIFIER + "\")\n" +
                     "  }\n" +
                     Arrays.stream(JACKSON_MODULES).map(ga -> "  implementation(\"" + ga + "\")\n").collect(Collectors.joining()) +
                     "}\n" +
