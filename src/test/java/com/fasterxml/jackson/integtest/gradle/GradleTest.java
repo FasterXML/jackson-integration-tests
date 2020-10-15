@@ -1,7 +1,5 @@
 package com.fasterxml.jackson.integtest.gradle;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.junit.Rule;
@@ -22,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class GradleTest
 {
 
-    static final String VERSION_QUALIFIER = "SNAPSHOT";
+    static final String VERSION_QUALIFIER = "latest.release";
 
     static final String[] JACKSON_MODULES = {
             // Core
@@ -98,31 +96,44 @@ public class GradleTest
     public void testJacksonBomDependency() throws Exception {
         Set<String> failedModules = new TreeSet<>();
 
-        Version version = new ObjectMapper().version();
-        String baseVersion = version.getMajorVersion() + "." + version.getMinorVersion() + "." + version.getPatchLevel();
-
         File settingsFile = testFolder.newFile("settings.gradle.kts");
         File buildFile = testFolder.newFile("build.gradle.kts");
 
+        Files.write("rootProject.name = \"test-project\"", settingsFile, Charsets.UTF_8);
+
         // run Gradle once to make sure everything is installed
         build("help");
+
+        Files.write(
+                "repositories {\n" +
+                "  mavenCentral()\n" +
+                "}\n" +
+                "val jacksonCore by configurations.creating\n" +
+                "dependencies {\n" +
+                "  \"jacksonCore\"(\"com.fasterxml.jackson.core:jackson-core:" + VERSION_QUALIFIER + "\")\n" +
+                "}\n" +
+                "tasks.register(\"printJacksonVersion\") {\n" +
+                "  doLast {\n" +
+                "    val jar = jacksonCore.singleFile.name\n" +
+                "    println(jar.substring(\"jackson-core\".length + 1, jar.indexOf(\".jar\")))\n" +
+                "  }\n" +
+                "}\n", buildFile, Charsets.UTF_8);
+        String latestReleaseVersion = build("printJacksonVersion");
+        System.out.println("Testing latest Jackson release " + latestReleaseVersion);
 
         for(String module : JACKSON_MODULES) {
             System.out.println("Checking: " + module);
 
             Files.write(
-                    "rootProject.name = \"test-project\"", settingsFile, Charsets.UTF_8);
-            Files.write(
                     "plugins {\n" +
                     " `java-library`\n" +
                     "}\n" +
                     "repositories {\n" +
-                    "  maven { url = uri(\"https://oss.sonatype.org/content/repositories/snapshots\") }\n" +
                     "  mavenCentral()\n" +
                     "}\n" +
                     "dependencies {\n" +
                     "  constraints {\n" +
-                    "    implementation(\"" + module + ":" + VERSION_QUALIFIER + "\")\n" +
+                    "    implementation(\"" + module + ":" + latestReleaseVersion + "\")\n" +
                     "  }\n" +
                     Arrays.stream(JACKSON_MODULES).map(ga -> "  implementation(\"" + ga + "\")\n").collect(Collectors.joining()) +
                     "}\n" +
@@ -132,10 +143,10 @@ public class GradleTest
                     "      println(it.name)\n" +
                     "    }\n" +
                     "  }\n" +
-                    "}", buildFile, Charsets.UTF_8);
+                    "}\n", buildFile, Charsets.UTF_8);
 
             try {
-                assertEquals(expectedClasspath(baseVersion), buildClasspath(baseVersion));
+                assertEquals(expectedClasspath(latestReleaseVersion), buildClasspath());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 failedModules.add(module);
@@ -152,11 +163,8 @@ public class GradleTest
         return classpath;
     }
 
-    private Set<String> buildClasspath(String baseVersion) throws Exception {
-        return Arrays.stream(build("printJars").split("\n")).map(jar ->
-                // trim snapshot timestamp part from version in Jar name as it may differ each module
-                jar.replaceFirst(baseVersion + "-.+\\.jar", baseVersion + ".jar")
-        ).collect(Collectors.toCollection(TreeSet::new));
+    private Set<String> buildClasspath() throws Exception {
+        return Arrays.stream(build("printJars").split("\n")).collect(Collectors.toCollection(TreeSet::new));
     }
 
     private String build(String task) throws Exception {
