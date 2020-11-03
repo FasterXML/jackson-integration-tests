@@ -3,6 +3,7 @@ package com.fasterxml.jackson.integtest.dt.datetime;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
@@ -66,10 +67,11 @@ public class Java8DateTimeTest extends BaseTest
     public void testZonedDateTimeWrite() throws Exception
     {
         ZonedDateTime date = ZonedDateTime.ofInstant(Instant.ofEpochSecond(0L), Z1);
+        // with no explicit timezone specification, timezone we pass will be used so
         String value = MAPPER.writer()
                 .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(date);
         assertEquals("The value is not correct.",
-                q("1970-01-01T00:00:00Z"), value);
+                q("1969-12-31T18:00:00-06:00"), value);
     }
 }

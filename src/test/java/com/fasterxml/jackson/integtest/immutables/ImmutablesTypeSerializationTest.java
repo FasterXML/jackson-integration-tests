@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import com.fasterxml.jackson.integtest.BaseTest;
+
 import org.immutables.value.Value;
 import org.junit.Test;
 
@@ -12,8 +15,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class ImmutablesTypeSerializationTest
+    extends BaseTest
 {
-
     @Value.Immutable
     @JsonDeserialize(as = ImmutableAccount.class)
     @JsonSerialize(as = ImmutableAccount.class)
@@ -43,7 +46,7 @@ public class ImmutablesTypeSerializationTest
     /**********************************************************
      */
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private final ObjectMapper MAPPER = jsonMapper();
 
     @Test
     public void testImmutablesSimpleDeserialization() throws IOException {
