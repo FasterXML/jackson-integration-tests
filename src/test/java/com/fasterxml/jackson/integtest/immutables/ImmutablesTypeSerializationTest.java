@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
@@ -11,8 +12,6 @@ import org.immutables.value.Value;
 import org.junit.Test;
 
 import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
 
 public class ImmutablesTypeSerializationTest
     extends BaseTest
@@ -38,6 +37,13 @@ public class ImmutablesTypeSerializationTest
     interface Entry<K, V> {
         K getKey();
         V getValue();
+    }
+
+    @Value.Immutable
+    @JsonDeserialize(as = ImmutableNamed.class)
+    @JsonSerialize(as = ImmutableNamed.class)
+    interface Named {
+        String getName();
     }
 
     /*
@@ -134,5 +140,11 @@ public class ImmutablesTypeSerializationTest
         Entry<Key<Account>, Account> deserialized = MAPPER.readValue(
                 json, new TypeReference<Entry<Key<Account>, Account>>() {});
         assertEquals(original, deserialized);
+    }
+
+    @Test(expected = MismatchedInputException.class)
+    public void testStringToSinglePropertyObjectCoercionIsNotAllowed() throws IOException {
+        Named named = MAPPER.readValue("\"foo\"", Named.class);
+        fail("Expected readValue to throw, but an object was deserialized: " + named);
     }
 }
