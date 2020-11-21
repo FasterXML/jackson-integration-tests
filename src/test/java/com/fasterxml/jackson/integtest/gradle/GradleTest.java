@@ -70,6 +70,7 @@ public class GradleTest
 
             // Modules, basic
             "com.fasterxml.jackson.module:jackson-module-afterburner",
+            "com.fasterxml.jackson.module:jackson-module-blackbird",
             "com.fasterxml.jackson.module:jackson-module-guice",
             "com.fasterxml.jackson.module:jackson-module-jaxb-annotations",
             "com.fasterxml.jackson.module:jackson-module-jsonSchema",
@@ -78,7 +79,10 @@ public class GradleTest
             "com.fasterxml.jackson.module:jackson-module-osgi",
             "com.fasterxml.jackson.module:jackson-module-parameter-names",
             "com.fasterxml.jackson.module:jackson-module-paranamer",
-            "com.fasterxml.jackson.module:jackson-module-scala_2.10",
+
+            // 20-Nov-2020, tatu: as per: [module-scala#480] support for Scala 2.10
+            //   dropped from Jackson 2.12
+//            "com.fasterxml.jackson.module:jackson-module-scala_2.10",
             "com.fasterxml.jackson.module:jackson-module-scala_2.11",
             "com.fasterxml.jackson.module:jackson-module-scala_2.12",
             "com.fasterxml.jackson.module:jackson-module-scala_2.13"
