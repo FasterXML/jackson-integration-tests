@@ -1,9 +1,11 @@
 package com.fasterxml.jackson.integtest.dt.datetime;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
@@ -18,9 +20,14 @@ public class Java8DateTimeTest extends BaseTest
 {
     private static final ZoneId Z1 = ZoneId.of("America/Chicago");
 
-//    static class TimeWrapper {
-//        public ZonedDateTime time;
-//    }
+    // from [databind#2983]
+    static class DurationWrapper2983 {
+        Duration d;
+
+        DurationWrapper2983(@JsonProperty("duration") Duration duration) {
+            d = duration;
+        }
+    }
 
     final private ObjectMapper MAPPER = jsonMapperBuilder()
             .addModule(new JavaTimeModule())
@@ -73,5 +80,15 @@ public class Java8DateTimeTest extends BaseTest
                 .writeValueAsString(date);
         assertEquals("The value is not correct.",
                 q("1969-12-31T18:00:00-06:00"), value);
+    }
+
+    // from [databind#2983]
+    public void testDurationViaConstructor() throws Exception
+    {
+        DurationWrapper2983 result = MAPPER.readValue("{ \"duration\": \"PT5M\" }",
+                DurationWrapper2983.class);
+        assertNotNull(result);
+        assertNotNull(result.d);
+        assertEquals("PT5M", result.d.toString());
     }
 }
