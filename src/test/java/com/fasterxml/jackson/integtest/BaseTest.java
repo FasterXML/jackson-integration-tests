@@ -27,6 +27,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
 public abstract class BaseTest
     extends TestCase
@@ -43,6 +44,11 @@ public abstract class BaseTest
             x = a;
             y = b;
         }
+
+        @Override
+        public String toString() {
+            return String.format("[x=%d,y=%d]",  x, y);
+        }
     }
 
     @JsonPropertyOrder({ "x", "y", "z" })
@@ -53,6 +59,11 @@ public abstract class BaseTest
         public PointXYZ(int a, int b, int c) {
             super(a, b);
             z = c;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[x=%d,y=%d,z=%d]",  x, y, z);
         }
     }
 
@@ -247,6 +258,12 @@ public abstract class BaseTest
 
     protected static YAMLMapper yamlMapper() {
         return yamlMapperBuilder().build();
+    }
+
+    // // // Adding other modules
+
+    protected static com.fasterxml.jackson.databind.Module afterburnerModule() {
+        return new AfterburnerModule();
     }
 
     /*

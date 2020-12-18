@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class CSVTest extends BaseTest
+public class BasicReadWriteCSVTest extends BaseTest
 {
     private final CsvMapper MAPPER = csvMapper();
 

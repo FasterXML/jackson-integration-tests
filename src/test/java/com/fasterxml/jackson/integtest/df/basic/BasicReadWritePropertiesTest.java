@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class PropertiesTest extends BaseTest
+public class BasicReadWritePropertiesTest extends BaseTest
 {
     public void testSimple() throws Exception
     {

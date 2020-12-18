@@ -17,7 +17,8 @@ public class MessagePackExtensionTest extends BaseTest
      *
      * https://github.com/FasterXML/jackson-databind/issues/2824
      */
-    public void testPOJONodeWithMessagePackExtensionShouldNotThrowExceptionWhenEvaluate() {
+    public void testPOJONodeWithMessagePackExtension() throws Exception
+    {
         final ArrayNode node = MAPPER.createArrayNode();
         node.add(new POJONode(new MessagePackExtensionType((byte) 0, new byte[]{2})));
         String json = node.toString();

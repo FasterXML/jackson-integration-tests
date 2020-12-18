@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class SmileTest extends BaseTest
+public class BasicReadWriteSmileTest extends BaseTest
 {
     public void testSimple() throws Exception
     {

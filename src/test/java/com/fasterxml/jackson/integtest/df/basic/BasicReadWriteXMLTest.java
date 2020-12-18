@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class XMLTest extends BaseTest
+public class BasicReadWriteXMLTest extends BaseTest
 {
     public void testSimple() throws Exception
     {

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class YAMLTest extends BaseTest
+public class BasicReadWriteYAMLTest extends BaseTest
 {
     @SuppressWarnings("serial")
     public void testSimple() throws Exception

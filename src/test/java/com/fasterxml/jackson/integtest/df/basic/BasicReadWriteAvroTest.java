@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-public class AvroTest extends BaseTest
+public class BasicReadWriteAvroTest extends BaseTest
 {
     public void testSimple() throws Exception
     {

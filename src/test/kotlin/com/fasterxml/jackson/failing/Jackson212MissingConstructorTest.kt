@@ -1,3 +1,5 @@
+package com.fasterxml.jackson.failing
+
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
 import com.fasterxml.jackson.dataformat.xml.XmlFactory
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
