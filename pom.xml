@@ -29,6 +29,9 @@
             module snapshot version
       -->
     <jackson.version.module.scala>2.12.2</jackson.version.module.scala>
+
+    <!-- 05-Mar-2021, tatu: "new" jsonp version will be added in 2.12.3+ -->
+    <jackson.version.new-jsonp>2.12.2</jackson.version.new-jsonp>
   </properties>
 
   <dependencies>
@@ -135,11 +138,38 @@
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
+      <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
+      <!-- !!! 05-Mar-2021, tatu: jackson-bom will include version
+             in 2.12.3 and later, but for 2.12.2 need to:
+        -->
+      <version>${jackson.version.new-jsonp}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-json-org</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr353</artifactId>
+    </dependency>
+
+    <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
+     -->
+    <!-- "old" jsr-353: -->
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <version>1.1.4</version>
+    </dependency>
+    <!--  "new" jakarta jsonp: -->
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.json</artifactId>
+        <version>2.0.0</version>
     </dependency>
 
     <!-- Some general modules -->
