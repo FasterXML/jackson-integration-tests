@@ -135,11 +135,34 @@
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
+      <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-json-org</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr353</artifactId>
+    </dependency>
+
+    <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
+     -->
+    <!-- "old" jsr-353: -->
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <version>1.1.4</version>
+    </dependency>
+    <!--  "new" jakarta jsonp: -->
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.json</artifactId>
+        <version>2.0.0</version>
     </dependency>
 
     <!-- Some general modules -->
