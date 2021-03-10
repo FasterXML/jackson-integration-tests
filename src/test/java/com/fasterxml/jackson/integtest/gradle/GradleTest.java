@@ -1,11 +1,5 @@
 package com.fasterxml.jackson.integtest.gradle;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -13,6 +7,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -99,7 +101,8 @@ public class GradleTest
      * It then depends on all other modules without defining a version. Resolving the classpath still succeeds,
      * with all modules having an aligned version, because the Jackson BOM is always present to provide the versions.
      */
-//    @Test
+    @Ignore
+    @Test
     public void testJacksonBomDependency() throws Exception
     {
         Set<String> failedModules = new TreeSet<>();
