@@ -101,8 +101,8 @@ public class GradleTest
      * It then depends on all other modules without defining a version. Resolving the classpath still succeeds,
      * with all modules having an aligned version, because the Jackson BOM is always present to provide the versions.
      */
-    @Ignore
     @Test
+//    @Ignore // ignore on all but the "active stable" (latest release) branch
     public void testJacksonBomDependency() throws Exception
     {
         Set<String> failedModules = new TreeSet<>();
