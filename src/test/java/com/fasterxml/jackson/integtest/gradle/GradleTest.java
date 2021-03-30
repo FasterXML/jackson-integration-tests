@@ -8,16 +8,18 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 public class GradleTest
 {
@@ -102,9 +104,10 @@ public class GradleTest
      * with all modules having an aligned version, because the Jackson BOM is always present to provide the versions.
      */
     @Test
-//    @Ignore // ignore on all but the "active stable" (latest release) branch
     public void testJacksonBomDependency() throws Exception
     {
+        Version version = new ObjectMapper().version();
+        String versionOfIntegrationTestProject = version.getMajorVersion() + "." + version.getMinorVersion();
         Set<String> failedModules = new TreeSet<>();
 
         File settingsFile = testFolder.newFile("settings.gradle.kts");
@@ -130,6 +133,12 @@ public class GradleTest
                 "  }\n" +
                 "}\n", buildFile, Charsets.UTF_8);
         String latestReleaseVersion = build("printJacksonVersion");
+        String latestReleaseMinor = latestReleaseVersion.substring(0, latestReleaseVersion.lastIndexOf('.'));
+
+        assumeTrue("Skipping test because latest release (" + latestReleaseMinor + ") " +
+                "does not correspond to version of integration test project (" + versionOfIntegrationTestProject +").",
+                versionOfIntegrationTestProject.equals(latestReleaseMinor));
+
         System.out.println("Testing latest Jackson release " + latestReleaseVersion);
 
         for(String module : JACKSON_MODULES) {
