@@ -39,21 +39,27 @@ public class GradleTest
             "com.fasterxml.jackson.dataformat:jackson-dataformat-properties",
             "com.fasterxml.jackson.dataformat:jackson-dataformat-protobuf",
             "com.fasterxml.jackson.dataformat:jackson-dataformat-smile",
+            "com.fasterxml.jackson.dataformat:jackson-dataformat-toml", // in 2.13
             "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
             "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml",
 
             // Data Types
+            "com.fasterxml.jackson.datatype:jackson-datatype-eclipse-collections",
             "com.fasterxml.jackson.datatype:jackson-datatype-guava",
-            "com.fasterxml.jackson.datatype:jackson-datatype-hibernate3",
+
+            // 27-Aug-2021, tatu: Removed from 2.13:
+//            "com.fasterxml.jackson.datatype:jackson-datatype-hibernate3",
             "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4",
             "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5",
             "com.fasterxml.jackson.datatype:jackson-datatype-hppc",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jakarta-jsonp", // since 2.13 (nee jsr-353)
             "com.fasterxml.jackson.datatype:jackson-datatype-jaxrs",
             "com.fasterxml.jackson.datatype:jackson-datatype-joda",
+            "com.fasterxml.jackson.datatype:jackson-datatype-joda-money",
             "com.fasterxml.jackson.datatype:jackson-datatype-jdk8",
             "com.fasterxml.jackson.datatype:jackson-datatype-json-org",
             "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
-            "com.fasterxml.jackson.datatype:jackson-datatype-jsr353",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr353", // old JSONP (javax.)
             "com.fasterxml.jackson.datatype:jackson-datatype-pcollections",
 
             // JAX-RS
@@ -64,9 +70,17 @@ public class GradleTest
             "com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider",
             "com.fasterxml.jackson.jaxrs:jackson-jaxrs-yaml-provider",
 
+            // Jakarta-RS (since 2.13)
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base",
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-cbor-provider",
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider",
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-smile-provider",
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-xml-provider",
+            "com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-yaml-provider",
+            
             // Jackson Jr.
             // "com.fasterxml.jackson.jr:jackson-jr-all" does not have the bom dependency, see: https://github.com/FasterXML/jackson-databind/issues/2726#issuecomment-707327060
-            // "com.fasterxml.jackson.jr:jackson-jr-annotation-support" activate when the BOM was published with https://github.com/FasterXML/jackson-bom/pull/35 included
+            "com.fasterxml.jackson.jr:jackson-jr-annotation-support",
             "com.fasterxml.jackson.jr:jackson-jr-objects",
             "com.fasterxml.jackson.jr:jackson-jr-retrofit2",
             "com.fasterxml.jackson.jr:jackson-jr-stree",
@@ -76,9 +90,11 @@ public class GradleTest
             "com.fasterxml.jackson.module:jackson-module-blackbird",
             "com.fasterxml.jackson.module:jackson-module-guice",
             "com.fasterxml.jackson.module:jackson-module-jaxb-annotations",
+            "com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations",
             "com.fasterxml.jackson.module:jackson-module-jsonSchema",
             "com.fasterxml.jackson.module:jackson-module-kotlin",
             "com.fasterxml.jackson.module:jackson-module-mrbean",
+            "com.fasterxml.jackson.module:jackson-module-no-ctor-deser",
             "com.fasterxml.jackson.module:jackson-module-osgi",
             "com.fasterxml.jackson.module:jackson-module-parameter-names",
             "com.fasterxml.jackson.module:jackson-module-paranamer",
