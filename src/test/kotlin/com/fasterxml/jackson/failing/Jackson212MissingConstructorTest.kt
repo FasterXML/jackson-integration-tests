@@ -10,8 +10,9 @@ import javax.xml.stream.XMLInputFactory
 class Jackson212MissingConstructorTest : BaseTest()
 {
     /**
-     * Succeeds in Jackson 2.11.x, but fails in Jackson 2.12.0
-     * See https://github.com/FasterXML/jackson-module-kotlin/issues/396
+     * Succeeds in Jackson 2.11.x, but fails in Jackson 2.12.x
+     *
+     * @see <a href="https://github.com/FasterXML/jackson-module-kotlin/issues/396">jackson-databind issue 396</a>
      */
     fun testMissingConstructor()
     {
