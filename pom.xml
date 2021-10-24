@@ -28,7 +28,7 @@
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
       -->
-    <jackson.version.module.scala>2.14.0</jackson.version.module.scala>
+    <jackson.version.module.scala>2.14.0-SNAPSHOT</jackson.version.module.scala>
   </properties>
 
   <dependencies>
