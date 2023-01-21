@@ -12,7 +12,7 @@ on:
     - "2.14"
   # Also run once per day anyway, at 10:00 UTC (18:00 PT)
   schedule:
-    - cron: "0 10 * * * *"
+    - cron: "0 10 * * *"
 permissions:
   contents: read
 
