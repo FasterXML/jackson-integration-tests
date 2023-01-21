@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.failing
+package com.fasterxml.jackson.integtest.kotlin
 
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
 import com.fasterxml.jackson.dataformat.xml.XmlFactory
@@ -21,7 +21,9 @@ class Jackson212MissingConstructorTest : BaseTest()
         val xml = "<product><stuff></stuff></product>"
         val product: Product = mapper.readValue(xml, Product::class.java)
 
-        assertEquals(Product(null), product)
+        // 20-Jan-2023, tatu: With Properties-based Creator, this was wrong:
+        //assertEquals(Product(null), product)
+        assertEquals(Product(Stuff(null)), product)
     }
 
     private data class Stuff(val str: String?)
