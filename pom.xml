@@ -22,7 +22,7 @@
     <javac.src.version>1.8</javac.src.version>
     <javac.target.version>1.8</javac.target.version>
     <scala.version>2.13</scala.version>
-    <scala.full.version>2.13.8</scala.full.version>
+    <scala.full.version>2.13.9</scala.full.version>
     <kotlin.version>1.6.10</kotlin.version>
 
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
