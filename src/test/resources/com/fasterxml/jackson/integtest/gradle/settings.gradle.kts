@@ -1,0 +1,1 @@
+rootProject.name = "jackson-gradle-module-metadata-integration-test"
