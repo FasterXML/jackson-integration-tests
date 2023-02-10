@@ -3,6 +3,9 @@ plugins {
 }
 
 val modulesWithoutGradleMetadata = listOf(
+        "com.fasterxml.jackson.module:jackson-module-afterburner", // TODO remove after next release - fixed in https://github.com/FasterXML/jackson-modules-base/pull/198
+        "com.fasterxml.jackson.jr:jackson-jr-all", // TODO is there a reason not to add this?
+
         "com.fasterxml.jackson:jackson-bom", // does not need it
         "com.fasterxml.jackson.module:jackson-module-scala_2.11", // built with sbt
         "com.fasterxml.jackson.module:jackson-module-scala_2.12", // built with sbt
