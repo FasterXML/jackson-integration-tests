@@ -49,6 +49,21 @@ public abstract class BaseTest
         public String toString() {
             return String.format("[x=%d,y=%d]",  x, y);
         }
+
+        @Override
+        public int hashCode() {
+            return x + y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof PointXY)) return false;
+            
+            PointXY other = (PointXY) o;
+
+            return (other.x == x) && (other.y == y);
+        }
     }
 
     @JsonPropertyOrder({ "x", "y", "z" })
@@ -65,6 +80,21 @@ public abstract class BaseTest
         public String toString() {
             return String.format("[x=%d,y=%d,z=%d]",  x, y, z);
         }
+ 
+        @Override
+        public int hashCode() {
+            return x + y + z;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof PointXYZ)) return false;
+            
+            PointXYZ other = (PointXYZ) o;
+
+            return (other.x == x) && (other.y == y) && (other.z == z);
+        }
     }
 
     protected static class CalendarWrapper {
@@ -74,7 +104,6 @@ public abstract class BaseTest
         public CalendarWrapper(Calendar v) { cal = v; }
     }
 
-    
     /*
     /**********************************************************
     /* Additional assertion methods
