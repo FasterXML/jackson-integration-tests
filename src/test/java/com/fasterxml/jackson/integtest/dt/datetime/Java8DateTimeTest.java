@@ -3,6 +3,7 @@ package com.fasterxml.jackson.integtest.dt.datetime;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -68,7 +69,7 @@ public class Java8DateTimeTest extends BaseTest
     {
         ZonedDateTime read = MAPPER.readValue(q("2000-01-01T12:00Z"), ZonedDateTime.class);
         assertEquals("The value is not correct.",
-                ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneId.of("Z")),
+                ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC),
                 read);
     }
 
