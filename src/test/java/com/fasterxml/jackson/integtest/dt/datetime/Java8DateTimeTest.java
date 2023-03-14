@@ -66,9 +66,10 @@ public class Java8DateTimeTest extends BaseTest
 
     public void testZonedDateTimeRead() throws Exception
     {
+        ZonedDateTime read = MAPPER.readValue(q("2000-01-01T12:00Z"), ZonedDateTime.class);
         assertEquals("The value is not correct.",
-                ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneId.of("UTC")),
-                MAPPER.readValue(q("2000-01-01T12:00Z"), ZonedDateTime.class));
+                ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneId.of("Z")),
+                read);
     }
 
     public void testZonedDateTimeWrite() throws Exception
