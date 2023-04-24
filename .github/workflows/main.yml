@@ -3,13 +3,11 @@ on:
   push:
     branches:
     - master
-    - "2.15"
-    - "2.14"
+    - "2.16"
   pull_request:
     branches:
     - master
-    - "2.15"
-    - "2.14"
+    - "2.16"
   # Also run once per day anyway, at 10:00 UTC (18:00 PT)
   schedule:
     - cron: "0 10 * * *"
