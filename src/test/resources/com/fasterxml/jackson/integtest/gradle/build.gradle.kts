@@ -3,7 +3,6 @@ plugins {
 }
 
 val modulesWithoutGradleMetadata = listOf(
-        "com.fasterxml.jackson.module:jackson-module-afterburner", // TODO remove after next release - fixed in https://github.com/FasterXML/jackson-modules-base/pull/198
         "com.fasterxml.jackson.jr:jackson-jr-all", // TODO is there a reason not to add this?
 
         "com.fasterxml.jackson:jackson-bom", // does not need it
@@ -15,6 +14,11 @@ val modulesWithoutGradleMetadata = listOf(
 
 dependencies {
     implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
+
+    // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
+    // implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.1-SNAPSHOT"))
+    // repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
+    // repositories.mavenCentral()
 }
 
 repositories.mavenCentral()
@@ -31,14 +35,14 @@ dependencies.components.withModule("com.fasterxml.jackson:jackson-bom") {
 
 tasks.register("checkMetadata") {
     doLast {
+        var message = ""
+
         configurations.compileClasspath.get().resolve() // triggers the rule above
 
         // Create dependencies to all Modules references in the BOM
         val allModules = configurations.detachedConfiguration(*allJacksonModule.map { dependencies.create(it) }.toTypedArray())
         // Tell Gradle to do the dependency resolution and return the result with dependency information
-        val allModulesResolved = allModules.incoming.resolutionResult.allComponents.filter {
-            it.moduleVersion!!.group.startsWith("com.fasterxml.jackson") && !modulesWithoutGradleMetadata.contains(it.moduleVersion!!.module.toString())
-        }
+        val allModulesResolved = resolveJacksonModules(allModules)
 
         val allModulesWithoutBomDependency = mutableListOf<String>()
         allModulesResolved.forEach { component ->
@@ -47,8 +51,37 @@ tasks.register("checkMetadata") {
             }
         }
         if (allModulesWithoutBomDependency.isNotEmpty()) {
-            val message = "Missing dependency to 'jackson-bom'. Gradle Metadata publishing is most likely broken:\n  - ${allModulesWithoutBomDependency.joinToString("\n  - ")}"
+            message += "Missing dependency to 'jackson-bom'. Gradle Metadata publishing is most likely broken:\n  - ${allModulesWithoutBomDependency.joinToString("\n  - ")}\n"
+        }
+
+        // fetch again in a separate context using only the POM metadata
+        repositories.all {
+            (this as MavenArtifactRepository).metadataSources {
+                mavenPom()
+                ignoreGradleMetadataRedirection()
+            }
+        }
+        val pomAllModules = configurations.detachedConfiguration(*allJacksonModule.map { dependencies.create(it) }.toTypedArray())
+        val pomAllModulesResolved = resolveJacksonModules(pomAllModules)
+        allModulesResolved.forEachIndexed { index, gmmModule ->
+            val pomModule = pomAllModulesResolved[index]
+
+            val pomDependencies = pomModule.dependencies.map { it.toString() }
+            val gmmDependencies = gmmModule.dependencies.filter { !it.requested.displayName.startsWith("com.fasterxml.jackson:jackson-bom:") }.map { it.toString() }
+            if (pomDependencies != gmmDependencies) {
+                message += "Dependencies of ${pomModule.id} are wrong in Gradle Metadata:" +
+                        "\n  POM:    ${pomDependencies.joinToString()}" +
+                        "\n  Gradle: ${gmmDependencies.joinToString()}" +
+                        "\n"
+            }
+        }
+        if (message.isNotEmpty()) {
             throw RuntimeException(message)
         }
     }
 }
+
+fun resolveJacksonModules(allModules: Configuration) =
+    allModules.incoming.resolutionResult.allComponents.filter {
+        it.moduleVersion!!.group.startsWith("com.fasterxml.jackson") && !modulesWithoutGradleMetadata.contains(it.moduleVersion!!.module.toString())
+    }
