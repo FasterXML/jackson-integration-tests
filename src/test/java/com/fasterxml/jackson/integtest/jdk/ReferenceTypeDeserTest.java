@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.integtest.BaseTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,6 +56,7 @@ public class ReferenceTypeDeserTest extends BaseTest
 
     private final ObjectMapper MAPPER = jsonMapperBuilder()
             .addModule(new GuavaModule())
+            .addModule(new Jdk8Module())
             .build();
 
     private final JsonNode NULL_NODE = MAPPER.getNodeFactory().nullNode();
@@ -84,9 +86,7 @@ public class ReferenceTypeDeserTest extends BaseTest
         JDKOptionalNodeFieldBean bean = MAPPER.readValue(JSON_FROM_NULL,
                 JDKOptionalNodeFieldBean.class);
 
-        // 28-Oct-2023, tatu: Seems wrong, but has to wait for 2.17
-        //_assertJDKOptionalsEqual(jdkOptional(NULL_NODE), bean.value);
-        _assertJDKOptionalsEqual(null, bean.value);
+        _assertJDKOptionalsEqual(jdkOptional(NULL_NODE), bean.value);
     }
 
     /*
