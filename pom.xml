@@ -23,7 +23,8 @@
     <javac.target.version>1.8</javac.target.version>
     <scala.version>2.13</scala.version>
     <scala.full.version>2.13.14</scala.full.version>
-    <kotlin.version>1.7.22</kotlin.version>
+    <!-- 08-Jun-2024, tatu: Jackson 2.18 supports Kotlin 1.8 and above only -->
+    <kotlin.version>1.8.10</kotlin.version>
 
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
