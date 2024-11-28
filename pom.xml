@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.fasterxml.jackson</groupId>
     <artifactId>jackson-base</artifactId>
-    <version>2.18.1</version>
+    <version>2.18.2</version>
   </parent>
   <groupId>com.fasterxml.jackson.test</groupId>
   <artifactId>jackson-integration-tests</artifactId>
@@ -22,7 +22,7 @@
     <javac.src.version>1.8</javac.src.version>
     <javac.target.version>1.8</javac.target.version>
     <scala.version>2.13</scala.version>
-    <scala.full.version>2.13.14</scala.full.version>
+    <scala.full.version>2.13.15</scala.full.version>
     <!-- 08-Jun-2024, tatu: Jackson 2.18 supports Kotlin 1.8 and above only -->
     <kotlin.version>1.8.10</kotlin.version>
 
