@@ -129,7 +129,8 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>19.0</version>
+      <!-- Jackson 2.18/2.19 have Guava 25.1-jre -->
+      <version>25.1-jre</version>
     </dependency>
     
     <!-- Also most datatypes -->
