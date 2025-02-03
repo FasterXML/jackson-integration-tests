@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.fasterxml.jackson</groupId>
+    <groupId>tools.jackson</groupId>
     <artifactId>jackson-base</artifactId>
-    <version>2.19.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.fasterxml.jackson.test</groupId>
+  <groupId>tools.jackson.test</groupId>
   <artifactId>jackson-integration-tests</artifactId>
   <name>Jackson Integration Tests</name>
   <packaging>jar</packaging>
@@ -19,8 +19,8 @@
     <tag>HEAD</tag>
   </scm>
   <properties>
-    <javac.src.version>1.8</javac.src.version>
-    <javac.target.version>1.8</javac.target.version>
+    <javac.src.version>17</javac.src.version>
+    <javac.target.version>17</javac.target.version>
     <scala.version>2.13</scala.version>
     <scala.full.version>2.13.14</scala.full.version>
     <!-- 08-Jun-2024, tatu: Jackson 2.19 supports Kotlin 1.9 and above only -->
@@ -30,7 +30,7 @@
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
 
-    <jackson.version.module.scala>2.19.0-SNAPSHOT</jackson.version.module.scala>
+    <jackson.version.module.scala>3.0.0-SNAPSHOT</jackson.version.module.scala>
       -->
   </properties>
 
@@ -40,23 +40,23 @@
       <artifactId>jackson-annotations</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
+      <groupId>tools.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
+      <groupId>tools.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
 
     <!-- JAXB sort of ubiquitous -->
     <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
+      <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-jaxb-annotations</artifactId>
     </dependency>
 
     <!-- other modules -->
     <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
+      <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-scala_${scala.version}</artifactId>
     </dependency>
     <dependency>
@@ -65,7 +65,7 @@
       <version>${scala.full.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
+      <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
     </dependency>
     <dependency>
@@ -76,39 +76,39 @@
 
     <!-- first, try to ensure dataformats work -->
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-avro</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-cbor</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-csv</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-ion</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-properties</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-protobuf</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-smile</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-xml</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <groupId>tools.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
     </dependency>
     <dependency>
@@ -119,49 +119,51 @@
 
     <!-- Then Jackson-jr -->
     <dependency>
-      <groupId>com.fasterxml.jackson.jr</groupId>
+      <groupId>tools.jackson.jr</groupId>
       <artifactId>jackson-jr-objects</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.jr</groupId>
+      <groupId>tools.jackson.jr</groupId>
       <artifactId>jackson-jr-stree</artifactId>
     </dependency>
 
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>19.0</version>
+      <version>33.1.0-jre</version>
     </dependency>
     
     <!-- Also most datatypes -->
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-joda</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-json-org</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr353</artifactId>
     </dependency>
+    <!-- Part of jackson-databind in 3.0: 
     <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jdk8</artifactId>
     </dependency>
+    -->
 
     <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
      -->
@@ -180,7 +182,7 @@
 
     <!-- Some general modules -->
     <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
+      <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-afterburner</artifactId>
     </dependency>
 
@@ -203,13 +205,11 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${version.junit}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.23.1</version>
       <scope>test</scope>
     </dependency>
 
