@@ -24,8 +24,7 @@
     <scala.version>2.13</scala.version>
     <scala.full.version>2.13.14</scala.full.version>
     <!-- 08-Jun-2024, tatu: Jackson 2.19 supports Kotlin 1.9 and above only -->
-    
-    <kotlin.version>1.9.25</kotlin.version>
+    <kotlin.version>2.0.21</kotlin.version>
 
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
@@ -232,12 +231,11 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>4.4.0</version>
+          <version>4.9.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.0.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -258,6 +256,9 @@
           </excludes>
         </configuration>
       </plugin>
+      <!-- 03-Feb-2025, tatu: Can't make Scala work with modules so
+	   need to comment out for time being...
+
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
@@ -279,6 +280,7 @@
           </execution>
         </executions>
       </plugin>
+-->
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
