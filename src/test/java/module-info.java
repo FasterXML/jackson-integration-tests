@@ -1,6 +1,9 @@
 // Module-info for integration tests
 module tools.jackson.integtest
 {
+    // JDK deps
+    requires java.xml;
+
     // Core deps
     requires com.fasterxml.jackson.annotation;
     requires tools.jackson.core;
@@ -31,4 +34,7 @@ module tools.jackson.integtest
     // 3rd party
     requires com.google.common;
     requires org.joda.time;
+
+    // Test libraries
+    requires junit;
 }

@@ -1,10 +1,10 @@
-package com.fasterxml.jackson.integtest.kotlin
+package tools.jackson.integtest.kotlin
 
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
-import com.fasterxml.jackson.dataformat.xml.XmlFactory
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import com.fasterxml.jackson.integtest.BaseTest
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import tools.jackson.dataformat.xml.JacksonXmlModule
+import tools.jackson.dataformat.xml.XmlFactory
+import tools.jackson.dataformat.xml.XmlMapper
+import tools.jackson.integtest.BaseTest
+import tools.jackson.module.kotlin.registerKotlinModule
 import javax.xml.stream.XMLInputFactory
 
 class Jackson212MissingConstructorTest : BaseTest()
