@@ -2,47 +2,48 @@
 module tools.jackson.integtest
 {
     // JDK deps
-    requires java.xml;
+    requires transitive java.xml;
 
     // Core deps
-    requires com.fasterxml.jackson.annotation;
-    requires tools.jackson.core;
-    requires tools.jackson.databind;
+    requires transitive com.fasterxml.jackson.annotation;
+    requires transitive tools.jackson.core;
+    requires transitive tools.jackson.databind;
 
     // Data formats
-    requires tools.jackson.dataformat.avro;
-    requires tools.jackson.dataformat.cbor;
-    requires tools.jackson.dataformat.csv;
-    requires tools.jackson.dataformat.ion;
-    requires tools.jackson.dataformat.protobuf;
-    requires tools.jackson.dataformat.properties;
-    requires tools.jackson.dataformat.smile;
-    requires tools.jackson.dataformat.xml;
-    requires tools.jackson.dataformat.yaml;
+    requires transitive tools.jackson.dataformat.avro;
+    requires transitive tools.jackson.dataformat.cbor;
+    requires transitive tools.jackson.dataformat.csv;
+    requires transitive tools.jackson.dataformat.ion;
+    requires transitive tools.jackson.dataformat.protobuf;
+    requires transitive tools.jackson.dataformat.properties;
+    requires transitive tools.jackson.dataformat.smile;
+    requires transitive tools.jackson.dataformat.xml;
+    requires transitive tools.jackson.dataformat.yaml;
 
     // Base modules
 
     // Data types 
-    requires tools.jackson.datatype.joda;
-    requires tools.jackson.datatype.javatime;
-    requires tools.jackson.datatype.jsonp;
-    requires tools.jackson.datatype.jsr353;
-    requires tools.jackson.datatype.guava;
+    requires transitive tools.jackson.datatype.joda;
+    requires transitive tools.jackson.datatype.javatime;
+    requires transitive tools.jackson.datatype.jsonp;
+    requires transitive tools.jackson.datatype.jsr353;
+    requires transitive tools.jackson.datatype.guava;
     
     // Other Jackson components
-    requires tools.jackson.jr.ob;
-    requires tools.jackson.jr.stree;
-    requires tools.jackson.module.kotlin;
+    requires transitive tools.jackson.jr.ob;
+    requires transitive tools.jackson.jr.stree;
+    requires transitive tools.jackson.module.afterburner;
+    requires transitive tools.jackson.module.kotlin;
 
     // 3rd party
-    requires com.google.common;
-    requires jakarta.json; // new JSONP
-    requires java.json; // old JSONP
-    requires kotlin.stdlib;
-    requires org.immutables.value;
-    requires org.joda.time;
+    requires transitive com.google.common;
+    requires transitive jakarta.json; // new JSONP
+    requires transitive java.json; // old JSONP
+    requires transitive kotlin.stdlib;
+    requires transitive org.immutables.value;
+    requires transitive org.joda.time;
 
     // And then actual test(-only) dependencies
-    requires org.junit.jupiter.api;
-    requires org.assertj.core;
+    requires transitive org.junit.jupiter.api;
+    requires transitive org.assertj.core;
 }
