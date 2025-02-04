@@ -12,14 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BasicReadWriteCBORTest extends BaseTest
 {
-    @SuppressWarnings("serial")
     @Test
     public void testSimple() throws Exception
     {
         ObjectMapper mapper = cborMapper();
-        byte[] data = mapper.writeValueAsBytes(new HashMap<String,String>() { });
+        Map<String, Object> input = new LinkedHashMap<>();
+        input.put("key", Integer.valueOf(1972));
+        input.put("key2", true);
+        input.put("key3", "abc");
 
-        Map<?,?> output = mapper.readValue(data, Map.class);
-        assertEquals(0, output.size());
+        byte[] encoded = mapper.writeValueAsBytes(input);
+        Map<?,?> output = mapper.readValue(encoded, Map.class);
+
+        assertEquals(input, output);
     }
 }

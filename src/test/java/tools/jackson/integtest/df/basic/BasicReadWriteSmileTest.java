@@ -16,10 +16,13 @@ public class BasicReadWriteSmileTest extends BaseTest
     public void testSimple() throws Exception
     {
         final ObjectMapper mapper = smileMapper();
-        final Map<String, Object> input = Collections.singletonMap("key", Integer.valueOf(1972));
-        byte[] smile = mapper.writeValueAsBytes(input);
+        Map<String, Object> input = new LinkedHashMap<>();
+        input.put("key", Integer.valueOf(1972));
+        input.put("key2", true);
+        input.put("key3", "abc");
+        byte[] encoded = mapper.writeValueAsBytes(input);
 
-        Map<?,?> output = mapper.readValue(smile, Map.class);
+        Map<?,?> output = mapper.readValue(encoded, Map.class);
         assertEquals(input, output);
     }
 }
