@@ -2,6 +2,8 @@ package tools.jackson.integtest.dt.guava;
 
 import java.util.Iterator;
 
+import org.junit.jupiter.api.Test;
+
 import com.google.common.collect.ImmutableSortedSet;
 
 import tools.jackson.core.type.TypeReference;
@@ -10,12 +12,15 @@ import tools.jackson.datatype.guava.GuavaModule;
 
 import tools.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class GuavaTest extends BaseTest
 {
     final private ObjectMapper MAPPER = jsonMapperBuilder()
             .addModule(new GuavaModule())
             .build();
 
+    @Test
     public void testImmutableSortedSet() throws Exception
     {
         ImmutableSortedSet<Integer> set = MAPPER.readValue("[5,1,2]",

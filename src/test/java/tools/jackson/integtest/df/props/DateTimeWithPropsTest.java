@@ -9,6 +9,7 @@ import org.joda.time.Instant;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.junit.jupiter.api.Test;
 
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.SerializationFeature;
@@ -18,6 +19,9 @@ import tools.jackson.dataformat.javaprop.JavaPropsMapper;
 import tools.jackson.datatype.joda.JodaModule;
 
 import tools.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DateTimeWithPropsTest extends BaseTest
 {
@@ -49,6 +53,7 @@ public class DateTimeWithPropsTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJDKCalendarTextual() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -60,6 +65,7 @@ public class DateTimeWithPropsTest extends BaseTest
         assertEquals(input.cal.getTimeInMillis(), result.cal.getTimeInMillis());
     }
 
+    @Test
     public void testJDKCalendarTimestamp() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -77,6 +83,7 @@ public class DateTimeWithPropsTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJodaDateTimeTextual() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
@@ -88,6 +95,7 @@ public class DateTimeWithPropsTest extends BaseTest
         assertEquals(input.dt, result.dt);
     }
 
+    @Test
     public void testJodaDateTimeNumeric() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
@@ -107,25 +115,30 @@ public class DateTimeWithPropsTest extends BaseTest
     // // // And then a wider set of things
 
     @SuppressWarnings("deprecation")
+    @Test
     public void testJodaDateMidnightNumeric() throws Exception {
         _testJodaMiscNumeric(org.joda.time.DateMidnight.class,
                 new org.joda.time.DateMidnight(TEST_TIMESTAMP));
     }
 
+    @Test
     public void testJodaInstantNumeric() throws Exception {
         _testJodaMiscNumeric(Instant.class, new Instant(TEST_TIMESTAMP));
     }
 
+    @Test
     public void testJodaLocalDateNumeric() throws Exception {
         _testJodaMiscNumeric(LocalDate.class, new LocalDate(TEST_TIMESTAMP));
     }
 
+    @Test
     public void testJodaLocalDateTimeNumeric() throws Exception {
         // 15-Jul-2020, tatu: Need to force use of UTC, default constructor would
         //    use local TimeZone
         _testJodaMiscNumeric(LocalDateTime.class, new LocalDateTime(TEST_TIMESTAMP,  DateTimeZone.UTC));
     }
 
+    @Test
     public void testJodaLocalTimeNumeric() throws Exception {
         _testJodaMiscNumeric(LocalTime.class, new LocalTime(TEST_TIMESTAMP));
     }

@@ -1,5 +1,7 @@
 package tools.jackson.integtest.dt.jsonp;
 
+import org.junit.jupiter.api.Test;
+
 import javax.json.JsonArray;
 import javax.json.JsonNumber;
 import javax.json.JsonString;
@@ -10,8 +12,11 @@ import tools.jackson.datatype.jsr353.JSR353Module;
 
 import tools.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class JavaxOldJsonpTest extends BaseTest
 {
+    @Test
     public void testSimpleDeser() throws Exception
     {
         final ObjectMapper mapper = jsonMapperBuilder()

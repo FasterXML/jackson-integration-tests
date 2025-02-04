@@ -8,6 +8,10 @@ import tools.jackson.datatype.joda.JodaModule;
 import tools.jackson.integtest.BaseTest;
 
 import org.joda.time.DateTime;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Simple tests to see that Joda module works too.
@@ -28,6 +32,7 @@ public class JodaTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testFailWithoutJodaModule() throws Exception
     {
         final ObjectMapper vanilla = jsonMapper();
@@ -53,6 +58,7 @@ public class JodaTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJodaBasicReadWrite() throws Exception
     {
         TimeWrapper input = new TimeWrapper();

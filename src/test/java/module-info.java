@@ -45,6 +45,6 @@ module tools.jackson.integtest
     requires org.joda.time;
 
     // And then actual test(-only) dependencies
-    requires junit;
+    requires org.junit.jupiter.api;
     requires org.assertj.core;
 }

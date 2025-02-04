@@ -2,6 +2,8 @@ package tools.jackson.integtest.dt.guava;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -13,12 +15,15 @@ import tools.jackson.datatype.guava.GuavaModule;
 
 import tools.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class GuavaWithAvroTest extends BaseTest
 {
     static class MultimapHolder {
         public Multimap<String, String> map = ArrayListMultimap.create();
     }
 
+    @Test
     public void testGenerateAvroForMultimap() throws Exception
     {
         final AvroMapper avroMapper = avroMapperBuilder()

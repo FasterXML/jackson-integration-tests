@@ -3,8 +3,6 @@ package tools.jackson.integtest;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import junit.framework.TestCase;
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import tools.jackson.core.*;
 import tools.jackson.core.json.JsonFactory;
@@ -30,8 +28,10 @@ import tools.jackson.dataformat.yaml.YAMLFactory;
 import tools.jackson.dataformat.yaml.YAMLMapper;
 import tools.jackson.module.afterburner.AfterburnerModule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 public abstract class BaseTest
-    extends TestCase
 {
     public enum ABC { A, B, C; }
 

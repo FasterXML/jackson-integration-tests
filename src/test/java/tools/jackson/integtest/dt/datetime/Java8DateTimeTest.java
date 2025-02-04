@@ -2,6 +2,8 @@ package tools.jackson.integtest.dt.datetime;
 
 import java.time.*;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tools.jackson.databind.ObjectMapper;
@@ -11,6 +13,8 @@ import tools.jackson.databind.exc.InvalidDefinitionException;
 import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 import tools.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Simple tests to see that Joda module works too.
@@ -38,6 +42,7 @@ public class Java8DateTimeTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testFailWithoutDateTimeModule() throws Exception
     {
         final ObjectMapper vanilla = jsonMapper();
@@ -63,14 +68,15 @@ public class Java8DateTimeTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testZonedDateTimeRead() throws Exception
     {
         ZonedDateTime read = MAPPER.readValue(q("2000-01-01T12:00Z"), ZonedDateTime.class);
-        assertEquals("The value is not correct.",
-                ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC),
+        assertEquals(ZonedDateTime.of(2000, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC),
                 read);
     }
 
+    @Test
     public void testZonedDateTimeWrite() throws Exception
     {
         ZonedDateTime date = ZonedDateTime.ofInstant(Instant.ofEpochSecond(0L), Z1);
@@ -78,11 +84,11 @@ public class Java8DateTimeTest extends BaseTest
         String value = MAPPER.writer()
                 .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(date);
-        assertEquals("The value is not correct.",
-                q("1969-12-31T18:00:00-06:00"), value);
+        assertEquals(q("1969-12-31T18:00:00-06:00"), value);
     }
 
     // from [databind#2983]
+    @Test
     public void testDurationViaConstructor() throws Exception
     {
         DurationWrapper2983 result = MAPPER.readValue("{ \"duration\": \"PT5M\" }",

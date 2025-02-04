@@ -1,22 +1,19 @@
 package tools.jackson.integtest.gradle;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.fail;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GradleTest
 {
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    @TempDir
+    public File testFolder;
 
     /**
      * This test calls the Gradle build in 'src/test/resources/com/fasterxml/jackson/integtest/gradle' which:
@@ -38,14 +35,14 @@ public class GradleTest
 
     private void copyToTestFolder(String fileName) throws IOException {
         Files.copy(new File(requireNonNull(getClass().getResource(fileName)).getFile()).toPath(),
-                new File(testFolder.getRoot(), fileName).toPath());
+                new File(testFolder, fileName).toPath());
     }
 
     private void build(String task) throws Exception {
         String gradlew = requireNonNull(getClass().getResource("gradlew")).getFile();
         Runtime.getRuntime().exec("chmod a+x " + gradlew).waitFor();
         ProcessBuilder bp = new ProcessBuilder(gradlew, task, "-q",
-                "--project-dir", testFolder.getRoot().getAbsolutePath());
+                "--project-dir", testFolder.getAbsolutePath());
         bp.redirectErrorStream(true);
         Process process = bp.start();
 

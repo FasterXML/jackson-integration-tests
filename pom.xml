@@ -189,7 +189,7 @@
     <dependency>
       <groupId>com.hubspot.jackson</groupId>
       <artifactId>jackson-datatype-protobuf</artifactId>
-      <version>0.9.12</version>
+      <version>0.9.17</version>
     </dependency>
 
     <!-- 02-Nov-2020, ckozak: Test interoperability with immutables: https://immutables.github.io/  -->
@@ -201,8 +201,8 @@
 
     <!-- Since we are test project, let's use compile-scope for everything -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>

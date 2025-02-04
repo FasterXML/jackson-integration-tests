@@ -1,14 +1,19 @@
 package tools.jackson.integtest.df.basic;
 
+import org.junit.jupiter.api.Test;
+
 import tools.jackson.dataformat.protobuf.ProtobufMapper;
 import tools.jackson.dataformat.protobuf.schema.ProtobufSchema;
 
 import tools.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BasicReadWriteProtobufTest extends BaseTest
 {
     private final ProtobufMapper MAPPER = protobufMapper();
 
+    @Test
     public void testSimpleRoundtrip() throws Exception
     {
         ProtobufSchema pointSchema = MAPPER.generateSchemaFor(PointXY.class);
