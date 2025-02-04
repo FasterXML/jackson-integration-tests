@@ -1,6 +1,6 @@
 package tools.jackson.integtest.df.basic;
 
-import com.fasterxml.jackson.databind.*;
+import tools.jackson.databind.*;
 
 import tools.jackson.dataformat.csv.CsvMapper;
 import tools.jackson.dataformat.csv.CsvSchema;

@@ -196,20 +196,19 @@
     <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value</artifactId>
-      <version>2.8.8</version>
-      <scope>test</scope>
+      <version>2.10.1</version>
     </dependency>
 
-    <!-- and good old junit too -->
+    <!-- Since we are test project, let's use compile-scope for everything -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
+      <scope>compile</scope>
     </dependency>
 
   </dependencies>
@@ -244,6 +243,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <argLine>--add-opens java.base/java.time=ALL-UNNAMED</argLine>
+
 	    <!-- 17-Dec-2020, tatu: Kotlin test seemed tricky until I realized
 	            author had forgotten to specify package. Exclusion now works
 	            without regex, left in place in case it might be needed
@@ -252,8 +253,9 @@
 <!--
             <exclude>%regex[.*/failing/.*.class]</exclude>
 -->
-            <exclude>com/fasterxml/jackson/**/failing/*</exclude>
+            <exclude>tools/jackson/**/failing/*</exclude>
           </excludes>
+
         </configuration>
       </plugin>
       <!-- 03-Feb-2025, tatu: Can't make Scala work with modules so
@@ -319,25 +321,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <!-- And different set up for JDK 17+ -->
-      <id>java17+</id>
-      <activation>
-        <jdk>[17,)</jdk>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M9</version>
-            <configuration>
-              <argLine>--add-opens java.base/java.time=ALL-UNNAMED</argLine>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

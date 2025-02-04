@@ -15,6 +15,7 @@ module tools.jackson.integtest
     requires tools.jackson.dataformat.avro;
     requires tools.jackson.dataformat.cbor;
     requires tools.jackson.dataformat.csv;
+    requires tools.jackson.dataformat.ion;
     requires tools.jackson.dataformat.protobuf;
     requires tools.jackson.dataformat.properties;
     requires tools.jackson.dataformat.smile;
@@ -32,11 +33,15 @@ module tools.jackson.integtest
     
     // // Other Jackson components
     requires tools.jackson.jr.ob;
+    requires tools.jackson.jr.stree;
     requires tools.jackson.module.kotlin;
 
     // // 3rd party
     requires com.google.common;
+    requires jakarta.json; // new JSONP
+    requires java.json; // old JSONP
     requires kotlin.stdlib;
+    requires org.immutables.value;
     requires org.joda.time;
 
     // And then actual test(-only) dependencies
