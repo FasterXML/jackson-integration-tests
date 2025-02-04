@@ -22,6 +22,8 @@ import tools.jackson.dataformat.protobuf.ProtobufFactory;
 import tools.jackson.dataformat.protobuf.ProtobufMapper;
 import tools.jackson.dataformat.smile.SmileFactory;
 import tools.jackson.dataformat.smile.SmileMapper;
+import tools.jackson.dataformat.toml.TomlFactory;
+import tools.jackson.dataformat.toml.TomlMapper;
 import tools.jackson.dataformat.xml.XmlFactory;
 import tools.jackson.dataformat.xml.XmlMapper;
 import tools.jackson.dataformat.yaml.YAMLFactory;
@@ -264,6 +266,18 @@ public abstract class BaseTest
 
     protected static JavaPropsMapper propsMapper() {
         return propsMapperBuilder().build();
+    }
+
+    protected static TomlMapper.Builder tomlMapperBuilder() {
+        return TomlMapper.builder();
+    }
+
+    protected static TomlMapper.Builder tomlMapperBuilder(TomlFactory f) {
+        return TomlMapper.builder(f);
+    }
+
+    protected static TomlMapper tomlMapper() {
+        return tomlMapperBuilder().build();
     }
 
     protected static XmlMapper.Builder xmlMapperBuilder() {

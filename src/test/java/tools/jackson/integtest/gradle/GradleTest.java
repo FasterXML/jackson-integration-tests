@@ -1,6 +1,7 @@
 package tools.jackson.integtest.gradle;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 
 import org.junit.jupiter.api.Test;
@@ -12,9 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GradleTest
 {
-    @TempDir
-    public File testFolder;
-
     /**
      * This test calls the Gradle build in 'src/test/resources/com/fasterxml/jackson/integtest/gradle' which:
      * - Collects all entries from the latest Jackson BOM
@@ -27,19 +25,24 @@ public class GradleTest
      * <a href="https://blog.gradle.org/alignment-with-gradle-module-metadata">blog.gradle.org/alignment-with-gradle-module-metadata</a>
      */
     @Test
-    public void testJacksonBomDependency() throws Exception {
-        copyToTestFolder("settings.gradle.kts");
-        copyToTestFolder("build.gradle.kts");
-        build(":checkMetadata");
+    public void testJacksonBomDependency(@TempDir File tempDir) throws Exception {
+        copyToTestFolder(tempDir, "settings.gradle.kts");
+        copyToTestFolder(tempDir, "build.gradle.kts");
+        build(tempDir, ":checkMetadata");
     }
 
-    private void copyToTestFolder(String fileName) throws IOException {
-        Files.copy(new File(requireNonNull(getClass().getResource(fileName)).getFile()).toPath(),
+    private void copyToTestFolder(File testFolder, String fileName) throws IOException {
+        URL resource = getClass().getResource(fileName);
+        assertNotNull(resource, "Null resource '"+fileName+"', from `"+getClass()+"`");
+        Files.copy(new File(resource.getFile()).toPath(),
                 new File(testFolder, fileName).toPath());
     }
 
-    private void build(String task) throws Exception {
-        String gradlew = requireNonNull(getClass().getResource("gradlew")).getFile();
+    private void build(File testFolder, String task) throws Exception {
+        String fileName = "gradlew";
+        URL resource = getClass().getResource(fileName);
+        assertNotNull(resource, "Null resource '"+fileName+"', from `"+getClass()+"`");
+        String gradlew = resource.getFile();
         Runtime.getRuntime().exec("chmod a+x " + gradlew).waitFor();
         ProcessBuilder bp = new ProcessBuilder(gradlew, task, "-q",
                 "--project-dir", testFolder.getAbsolutePath());

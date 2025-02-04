@@ -19,6 +19,7 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.dataformat.smile;
     requires transitive tools.jackson.dataformat.xml;
     requires transitive tools.jackson.dataformat.yaml;
+    requires transitive tools.jackson.dataformat.toml;
 
     // Base modules
 
