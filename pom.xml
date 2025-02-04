@@ -26,11 +26,12 @@
     <!-- 08-Jun-2024, tatu: Jackson 2.19 supports Kotlin 1.9 and above only -->
     <kotlin.version>2.0.21</kotlin.version>
 
+    <immutables.version>2.10.1</immutables.version>
+
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
-
     <jackson.version.module.scala>3.0.0-SNAPSHOT</jackson.version.module.scala>
-      -->
+    -->
   </properties>
 
   <dependencies>
@@ -54,6 +55,8 @@
     </dependency>
 
     <!-- other modules -->
+
+    <!-- 03-Feb-2025, tatu: Scala won't play nice; can't test
     <dependency>
       <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-scala_${scala.version}</artifactId>
@@ -63,6 +66,8 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.full.version}</version>
     </dependency>
+    -->
+
     <dependency>
       <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
@@ -196,7 +201,8 @@
     <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value</artifactId>
-      <version>2.10.1</version>
+      <version>${immutables.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Since we are test project, let's use compile-scope for everything -->
@@ -253,7 +259,9 @@
 <!--
             <exclude>%regex[.*/failing/.*.class]</exclude>
 -->
+<!--
             <exclude>tools/jackson/**/failing/*</exclude>
+            -->
           </excludes>
 
         </configuration>
@@ -282,7 +290,7 @@
           </execution>
         </executions>
       </plugin>
--->
+      -->
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
@@ -305,6 +313,15 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <annotationProcessorPaths>
+              <dependency>
+                  <groupId>org.immutables</groupId>
+                  <artifactId>value</artifactId>
+                  <version>${immutables.version}</version>
+              </dependency>
+            </annotationProcessorPaths>
+        </configuration>
         <executions>
           <execution>
             <id>default-testCompile</id>

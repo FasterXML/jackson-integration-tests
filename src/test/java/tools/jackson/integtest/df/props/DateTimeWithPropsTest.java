@@ -114,12 +114,15 @@ public class DateTimeWithPropsTest extends BaseTest
 
     // // // And then a wider set of things
 
+    // Midnight no longer supported by Jackson 3.0
+    /*
     @SuppressWarnings("deprecation")
     @Test
     public void testJodaDateMidnightNumeric() throws Exception {
         _testJodaMiscNumeric(org.joda.time.DateMidnight.class,
                 new org.joda.time.DateMidnight(TEST_TIMESTAMP));
     }
+    */
 
     @Test
     public void testJodaInstantNumeric() throws Exception {

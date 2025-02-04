@@ -1,5 +1,5 @@
 // Module-info for integration tests, non-test
-module tools.jackson.integtest
+module tools.jackson.integtest.base
 {
     // JDK deps
     requires transitive java.xml;
