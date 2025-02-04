@@ -3,6 +3,7 @@ package tools.jackson.integtest.kotlin
 import tools.jackson.dataformat.xml.XmlMapper
 import tools.jackson.integtest.BaseTest
 import tools.jackson.module.kotlin.kotlinModule
+import org.junit.jupiter.api.Assertions;
 
 class Jackson212MissingConstructorTest : BaseTest()
 {
@@ -18,8 +19,8 @@ class Jackson212MissingConstructorTest : BaseTest()
         val product: Product = mapper.readValue(xml, Product::class.java)
 
         // 20-Jan-2023, tatu: With Properties-based Creator, this was wrong:
-        //assertEquals(Product(null), product)
-        assertEquals(Product(Stuff(null)), product)
+        // Assertions.assertEquals(Product(null), product)
+        Assertions.assertEquals(Product(Stuff(null)), product)
     }
 
     data class Stuff(val str: String?)
