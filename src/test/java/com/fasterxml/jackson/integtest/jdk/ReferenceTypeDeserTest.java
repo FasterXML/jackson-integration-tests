@@ -2,6 +2,8 @@ package com.fasterxml.jackson.integtest.jdk;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,6 +69,7 @@ public class ReferenceTypeDeserTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testNullFieldForAtomicRef() throws Exception
     {
         AtomicRefNodeFieldBean bean = MAPPER.readValue(JSON_FROM_NULL,
@@ -74,6 +77,7 @@ public class ReferenceTypeDeserTest extends BaseTest
         _assertAtomicRefsEqual(atomicReference(NULL_NODE), bean.value);
     }
 
+    @Test
     public void testNullFieldForGuavaOptional() throws Exception
     {
         GuavaOptionalNodeFieldBean bean = MAPPER.readValue(JSON_FROM_NULL,
@@ -81,6 +85,7 @@ public class ReferenceTypeDeserTest extends BaseTest
         _assertGuavaOptionalsEqual(guavaOptional(NULL_NODE), bean.value);
     }
 
+    @Test
     public void testNullFieldForJDKOptional() throws Exception
     {
         JDKOptionalNodeFieldBean bean = MAPPER.readValue(JSON_FROM_NULL,
@@ -95,6 +100,7 @@ public class ReferenceTypeDeserTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testAbsentFieldForAtomicRef() throws Exception
     {
         AtomicRefNodeFieldBean bean = MAPPER.readValue(JSON_FROM_ABSENT,
@@ -104,6 +110,7 @@ public class ReferenceTypeDeserTest extends BaseTest
         _assertAtomicRefsEqual(null, bean.value);
     }
 
+    @Test
     public void testAbsentFieldForGuavaOptional() throws Exception
     {
         GuavaOptionalNodeFieldBean bean = MAPPER.readValue(JSON_FROM_ABSENT,
@@ -113,6 +120,7 @@ public class ReferenceTypeDeserTest extends BaseTest
         _assertGuavaOptionalsEqual(null, bean.value);
     }
 
+    @Test
     public void testAbsentFieldForJDKOptional() throws Exception
     {
         JDKOptionalNodeFieldBean bean = MAPPER.readValue(JSON_FROM_ABSENT,

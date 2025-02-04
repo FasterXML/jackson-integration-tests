@@ -5,9 +5,13 @@ import jakarta.json.JsonNumber;
 import jakarta.json.JsonString;
 import jakarta.json.JsonValue;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsonp.JSONPModule;
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 // 05-Mar-2021, tatu: Bloody fudging spit. Javax/Jakarta transition is
 //  a completely and utter mess -- if BOTH implementations in Classpath,
@@ -18,6 +22,7 @@ import com.fasterxml.jackson.integtest.BaseTest;
 public class JakartaNewJsonpTest extends BaseTest
 {
     @SuppressWarnings("unused")
+    @Test
     public void testSimpleDeser() throws Exception
     {
         if (false) {

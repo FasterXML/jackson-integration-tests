@@ -2,10 +2,14 @@ package com.fasterxml.jackson.integtest.df.xml;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OptionalWithXMLTest extends BaseTest
 {
@@ -28,6 +32,7 @@ public class OptionalWithXMLTest extends BaseTest
             .build();
 
     // For [modules-java8#280]: working case when enabling `xsi:nil` writes:
+    @Test
     public void testOptionalWithXMLWriteAndRead() throws Exception
     {
         String doc = MAPPER.writeValueAsString(new OptionalBean());
@@ -37,6 +42,7 @@ public class OptionalWithXMLTest extends BaseTest
     }
 
     // For [modules-java8#280]: working case with `xsi:nil` as input
+    @Test
     public void testOptionalWithXMLReadWithNil() throws Exception
     {
         final String doc = "<OptionalBean><opt xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/></OptionalBean>";

@@ -1,5 +1,7 @@
 package com.fasterxml.jackson.integtest.jacksonjr;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.core.TreeNode;
 
 import com.fasterxml.jackson.integtest.BaseTest;
@@ -9,6 +11,8 @@ import com.fasterxml.jackson.jr.stree.JrSimpleTreeExtension;
 import com.fasterxml.jackson.jr.stree.JrsArray;
 import com.fasterxml.jackson.jr.stree.JrsObject;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 // Copied from `ReadViaJSONTest` of jackson-jr/jr-stree
 public class JacksonJrTreeTest extends BaseTest
 {
@@ -17,6 +21,7 @@ public class JacksonJrTreeTest extends BaseTest
             .register(new JrSimpleTreeExtension())
         .build();
 
+    @Test
     public void testSimpleList() throws Exception
     {
         final String INPUT = "[true,\"abc\"]";
@@ -30,6 +35,7 @@ public class JacksonJrTreeTest extends BaseTest
         assertEquals(INPUT, JSON_WITH_TREE.asString(node));
     }
 
+    @Test
     public void testSimpleMap() throws Exception
     {
         final String INPUT = "{\"a\":1,\"b\":true,\"c\":3}";

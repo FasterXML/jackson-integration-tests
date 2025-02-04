@@ -1,15 +1,20 @@
 package com.fasterxml.jackson.integtest.df.basic;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.databind.*;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BasicReadWriteCSVTest extends BaseTest
 {
     private final CsvMapper MAPPER = csvMapper();
 
+    @Test
     public void testSimpleSequenceNoHeader() throws Exception
     {
         try (MappingIterator<PointXY> it = MAPPER.readerWithSchemaFor(PointXY.class)
@@ -32,6 +37,7 @@ public class BasicReadWriteCSVTest extends BaseTest
         }
     }
 
+    @Test
     public void testSimpleSequenceWithHeader() throws Exception
     {
         final CsvSchema schema = MAPPER.schemaFor(PointXY.class)
