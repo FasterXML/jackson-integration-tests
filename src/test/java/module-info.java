@@ -30,9 +30,11 @@ module tools.jackson.integtest
     
     // Other Jackson components
     requires tools.jackson.jr.ob;
+    requires tools.jackson.module.kotlin;
 
     // 3rd party
     requires com.google.common;
+    requires kotlin.stdlib;
     requires org.joda.time;
 
     // Test libraries

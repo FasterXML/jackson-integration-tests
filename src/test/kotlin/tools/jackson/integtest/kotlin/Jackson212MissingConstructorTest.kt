@@ -1,11 +1,8 @@
 package tools.jackson.integtest.kotlin
 
-import tools.jackson.dataformat.xml.JacksonXmlModule
-import tools.jackson.dataformat.xml.XmlFactory
 import tools.jackson.dataformat.xml.XmlMapper
 import tools.jackson.integtest.BaseTest
-import tools.jackson.module.kotlin.registerKotlinModule
-import javax.xml.stream.XMLInputFactory
+import tools.jackson.module.kotlin.kotlinModule
 
 class Jackson212MissingConstructorTest : BaseTest()
 {
@@ -15,8 +12,7 @@ class Jackson212MissingConstructorTest : BaseTest()
      */
     fun testMissingConstructor()
     {
-        val factory = XmlFactory(XMLInputFactory.newInstance())
-        val mapper = XmlMapper(factory, JacksonXmlModule()).registerKotlinModule()
+        val mapper = XmlMapper.builder().addModule(kotlinModule()).build();
 
         val xml = "<product><stuff></stuff></product>"
         val product: Product = mapper.readValue(xml, Product::class.java)
@@ -26,6 +22,6 @@ class Jackson212MissingConstructorTest : BaseTest()
         assertEquals(Product(Stuff(null)), product)
     }
 
-    private data class Stuff(val str: String?)
-    private data class Product(val stuff: Stuff?)
+    data class Stuff(val str: String?)
+    data class Product(val stuff: Stuff?)
 }
