@@ -27,7 +27,8 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.datatype.joda;
     requires transitive tools.jackson.datatype.javatime;
     requires transitive tools.jackson.datatype.jsonp;
-    requires transitive tools.jackson.datatype.jsr353;
+    // No more supported on 3.0
+    //requires transitive tools.jackson.datatype.jsr353;
     requires transitive tools.jackson.datatype.guava;
     
     // Other Jackson components
@@ -39,7 +40,6 @@ module tools.jackson.integtest.base
     // 3rd party
     requires transitive com.google.common;
     requires transitive jakarta.json; // new JSONP
-    requires transitive java.json; // old JSONP
     requires transitive kotlin.stdlib;
     requires transitive org.immutables.value;
     requires transitive org.joda.time;

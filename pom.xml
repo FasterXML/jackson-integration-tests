@@ -162,10 +162,6 @@
       <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
-    <dependency>
-      <groupId>tools.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr353</artifactId>
-    </dependency>
     <!-- Part of jackson-databind in 3.0: 
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
@@ -175,12 +171,6 @@
 
     <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
      -->
-    <!-- "old" jsr-353: -->
-    <dependency>
-        <groupId>org.glassfish</groupId>
-        <artifactId>javax.json</artifactId>
-        <version>1.1.4</version>
-    </dependency>
     <!--  "new" jakarta jsonp: -->
     <dependency>
         <groupId>jakarta.json</groupId>

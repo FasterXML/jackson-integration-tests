@@ -20,7 +20,7 @@ public class ImmutablesTypeSerializationTest
     @Value.Immutable
     @JsonDeserialize(as = ImmutableAccount.class)
     @JsonSerialize(as = ImmutableAccount.class)
-    interface Account {
+    public interface Account {
         Long getId();
         String getName();
     }
@@ -28,14 +28,14 @@ public class ImmutablesTypeSerializationTest
     @Value.Immutable
     @JsonDeserialize(as = ImmutableKey.class)
     @JsonSerialize(as = ImmutableKey.class)
-    interface Key<T> {
+    public interface Key<T> {
         T getId();
     }
 
     @Value.Immutable
     @JsonDeserialize(as = ImmutableEntry.class)
     @JsonSerialize(as = ImmutableEntry.class)
-    interface Entry<K, V> {
+    public interface Entry<K, V> {
         K getKey();
         V getValue();
     }
