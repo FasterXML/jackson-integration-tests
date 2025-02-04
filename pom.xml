@@ -269,8 +269,8 @@
             <exclude>%regex[.*/failing/.*.class]</exclude>
 -->
 <!--
-            <exclude>tools/jackson/**/failing/*</exclude>
             -->
+            <exclude>tools/jackson/**/failing/*</exclude>
           </excludes>
 
         </configuration>

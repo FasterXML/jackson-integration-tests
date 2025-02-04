@@ -46,5 +46,6 @@ module tools.jackson.integtest.base
 
     // And then actual test(-only) dependencies
     requires transitive org.junit.jupiter.api;
+    requires transitive org.junit.platform.commons;
     requires transitive org.assertj.core;
 }
