@@ -1,17 +1,15 @@
-// Module-info for integration tests, actual tests
+// Module-info for integration tests, non-test
 module tools.jackson.integtest
 {
-    // Same deps as "non-test" side (lovely duplication)
-    
-    // // JDK deps
+    // JDK deps
     requires java.xml;
 
-    // // Core deps
+    // Core deps
     requires com.fasterxml.jackson.annotation;
     requires tools.jackson.core;
     requires tools.jackson.databind;
 
-    // // Data formats
+    // Data formats
     requires tools.jackson.dataformat.avro;
     requires tools.jackson.dataformat.cbor;
     requires tools.jackson.dataformat.csv;
@@ -21,25 +19,21 @@ module tools.jackson.integtest
     requires tools.jackson.dataformat.xml;
     requires tools.jackson.dataformat.yaml;
 
-    // // Base modules
+    // Base modules
 
-    // // Data types 
+    // Data types 
     requires tools.jackson.datatype.joda;
     requires tools.jackson.datatype.javatime;
     requires tools.jackson.datatype.jsonp;
     requires tools.jackson.datatype.jsr353;
     requires tools.jackson.datatype.guava;
     
-    // // Other Jackson components
+    // Other Jackson components
     requires tools.jackson.jr.ob;
     requires tools.jackson.module.kotlin;
 
-    // // 3rd party
+    // 3rd party
     requires com.google.common;
     requires kotlin.stdlib;
     requires org.joda.time;
-
-    // And then actual test(-only) dependencies
-    requires junit;
-    requires org.assertj.core;
 }
