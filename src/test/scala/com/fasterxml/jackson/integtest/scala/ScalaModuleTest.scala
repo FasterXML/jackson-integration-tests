@@ -2,23 +2,27 @@ package com.fasterxml.jackson.integtest.scala
 
 import java.lang.reflect.{ParameterizedType, Type}
 
+import org.junit.jupiter.api.Test
+
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.integtest.BaseTest
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import junit.framework.TestCase
+
+import org.junit.jupiter.api.Assertions
 
 class ScalaModuleTest extends BaseTest {
 
   val mapper = new ObjectMapper().registerModule(DefaultScalaModule)
 
+  @Test
   def testBasicCaseClass(): Unit = {
     val instance = ConstructorTestCaseClass(12, "text")
     val json = mapper.writeValueAsString(instance)
-    TestCase.assertTrue("json text includes intValue", json.contains(""""intValue":12"""))
-    TestCase.assertTrue("json text includes stringValue", json.contains(""""stringValue":"text""""))
+    Assertions.assertTrue(json.contains(""""intValue":12"""), "json text includes intValue")
+    Assertions.assertTrue(json.contains(""""stringValue":"text""""), "json text includes stringValue")
     val deserializedInstance = deserialize[ConstructorTestCaseClass](json)
-    TestCase.assertEquals(instance, deserializedInstance)
+    Assertions.assertEquals(instance, deserializedInstance)
   }
 
   private def deserialize[T: Manifest](value: String) : T = mapper.readValue(value, typeReference[T])

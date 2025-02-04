@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,6 +15,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DateTimeWithXMLTest extends BaseTest
 {
@@ -48,6 +51,7 @@ public class DateTimeWithXMLTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJDKCalendarTextual() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -61,6 +65,7 @@ public class DateTimeWithXMLTest extends BaseTest
         assertEquals(input.cal.getTimeInMillis(), result.cal.getTimeInMillis());
     }
 
+    @Test
     public void testJDKCalendarTimestamp() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -80,6 +85,7 @@ public class DateTimeWithXMLTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJodaDateTimeWrapperTextual() throws Exception
     {
         JodaDateTimeWrapper input = new JodaDateTimeWrapper(TEST_JODA_DATETIME);
@@ -92,6 +98,7 @@ public class DateTimeWithXMLTest extends BaseTest
         assertEquals(input.dt, result.dt);
     }
 
+    @Test
     public void testJodaRootDateTimeTextual() throws Exception
     {
         String xml = MAPPER.writer()
@@ -104,6 +111,7 @@ public class DateTimeWithXMLTest extends BaseTest
         assertEquals(TEST_JODA_DATETIME, result);
     }
 
+    @Test
     public void testJodaRootDateTimeNumeric() throws Exception
     {
         String xml = MAPPER.writer()
@@ -121,6 +129,7 @@ public class DateTimeWithXMLTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJava8DateTimeWrapperTextual() throws Exception
     {
         Java8ZonedDateTimeWrapper input = new Java8ZonedDateTimeWrapper(TEST_JAVA8_ZONEDDATETIME);
@@ -132,6 +141,7 @@ public class DateTimeWithXMLTest extends BaseTest
         _assertEquality(input.dt, result.dt);
     }
 
+    @Test
     public void testJava8RootDateTimeTextual() throws Exception
     {
         String xml = MAPPER.writer()
@@ -145,6 +155,7 @@ public class DateTimeWithXMLTest extends BaseTest
         _assertEquality(TEST_JAVA8_ZONEDDATETIME, result);
     }
 
+    @Test
     public void testJava8RootDateTimeNumeric() throws Exception
     {
         String xml = MAPPER.writer()

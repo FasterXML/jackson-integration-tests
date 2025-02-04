@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import org.joda.time.DateTime;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -12,6 +13,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DateTimeWithCSVTest extends BaseTest
 {
@@ -38,6 +42,7 @@ public class DateTimeWithCSVTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJDKCalendarTextual() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -50,6 +55,7 @@ public class DateTimeWithCSVTest extends BaseTest
         assertEquals(input.cal.getTimeInMillis(), result.cal.getTimeInMillis());
     }
 
+    @Test
     public void testJDKCalendarTimestamp() throws Exception
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
@@ -74,6 +80,7 @@ public class DateTimeWithCSVTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testJodaDateTimeTextual() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
@@ -86,6 +93,7 @@ public class DateTimeWithCSVTest extends BaseTest
         assertEquals(input.dt, result.dt);
     }
 
+    @Test
     public void testJodaDateTimeTimestamp() throws Exception
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);

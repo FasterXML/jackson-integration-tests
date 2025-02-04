@@ -3,12 +3,16 @@ package com.fasterxml.jackson.integtest.dt.datetime;
 import java.time.Duration;
 import java.util.*;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.annotation.*;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 // Related to [databind#2795], but also [databind#2683] -- basically
 // mix-ins for java.time.* should still work with Jackson 2.12.
@@ -40,6 +44,7 @@ public class MixinForJava8DateTimesTest extends BaseTest
         public abstract int getNano();
     }
 
+    @Test
     public void testMixinWithJava8DateTimeSer() throws Exception
     {
         ObjectMapper mapper = JsonMapper.builder()
@@ -54,6 +59,7 @@ public class MixinForJava8DateTimesTest extends BaseTest
         }
     }
 
+    @Test
     public void testMixinWithJava8DateTimeDeser() throws Exception
     {
         ObjectMapper mapper = JsonMapper.builder()

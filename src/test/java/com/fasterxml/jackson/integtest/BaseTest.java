@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import junit.framework.TestCase;
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -29,8 +27,10 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 public abstract class BaseTest
-    extends TestCase
 {
     protected enum ABC { A, B, C; }
 

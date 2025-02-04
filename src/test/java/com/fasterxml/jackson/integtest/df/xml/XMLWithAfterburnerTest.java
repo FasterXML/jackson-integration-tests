@@ -1,8 +1,12 @@
 package com.fasterxml.jackson.integtest.df.xml;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.integtest.BaseTest;
 import com.fasterxml.jackson.integtest.testutil.FiveMinuteUser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class XMLWithAfterburnerTest extends BaseTest
 {
@@ -16,6 +20,7 @@ public class XMLWithAfterburnerTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testReadWriteXMLWithAfterburner() throws Exception
     {
         // First with simple Point

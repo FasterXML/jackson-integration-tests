@@ -5,12 +5,17 @@ import javax.json.JsonNumber;
 import javax.json.JsonString;
 import javax.json.JsonValue;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr353.JSR353Module;
 import com.fasterxml.jackson.integtest.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class JavaxOldJsonpTest extends BaseTest
 {
+    @Test
     public void testSimpleDeser() throws Exception
     {
         final ObjectMapper mapper = jsonMapperBuilder()

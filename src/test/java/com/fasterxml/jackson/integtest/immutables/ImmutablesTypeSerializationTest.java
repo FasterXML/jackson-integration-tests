@@ -1,5 +1,9 @@
 package com.fasterxml.jackson.integtest.immutables;
 
+import org.junit.jupiter.api.Test;
+
+import org.immutables.value.Value;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -7,12 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import com.fasterxml.jackson.integtest.BaseTest;
 
-import org.immutables.value.Value;
-import org.junit.Test;
-
-import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ImmutablesTypeSerializationTest
     extends BaseTest
@@ -49,7 +48,7 @@ public class ImmutablesTypeSerializationTest
     private final ObjectMapper MAPPER = jsonMapper();
 
     @Test
-    public void testImmutablesSimpleDeserialization() throws IOException {
+    public void testImmutablesSimpleDeserialization() throws Exception {
         Account expected = ImmutableAccount.builder()
                 .id(1L)
                 .name("foo")
@@ -59,7 +58,7 @@ public class ImmutablesTypeSerializationTest
     }
 
     @Test
-    public void testImmutablesSimpleRoundTrip() throws IOException {
+    public void testImmutablesSimpleRoundTrip() throws Exception {
         Account original = ImmutableAccount.builder()
                 .id(1L)
                 .name("foo")
@@ -70,7 +69,7 @@ public class ImmutablesTypeSerializationTest
     }
 
     @Test
-    public void testImmutablesSimpleGenericDeserialization() throws IOException {
+    public void testImmutablesSimpleGenericDeserialization() throws Exception {
         Key<Account> expected = ImmutableKey.<Account>builder()
                 .id(ImmutableAccount.builder()
                         .id(1L)
@@ -84,7 +83,7 @@ public class ImmutablesTypeSerializationTest
     }
 
     @Test
-    public void testImmutablesSimpleGenericRoundTrip() throws IOException {
+    public void testImmutablesSimpleGenericRoundTrip() throws Exception {
         Key<Account> original = ImmutableKey.<Account>builder()
                 .id(ImmutableAccount.builder()
                         .id(1L)
@@ -97,7 +96,7 @@ public class ImmutablesTypeSerializationTest
     }
 
     @Test
-    public void testImmutablesMultipleTypeParametersDeserialization() throws IOException {
+    public void testImmutablesMultipleTypeParametersDeserialization() throws Exception {
         Entry<Key<Account>, Account> expected = ImmutableEntry.<Key<Account>, Account>builder()
                 .key(ImmutableKey.<Account>builder()
                         .id(ImmutableAccount.builder()
@@ -117,7 +116,7 @@ public class ImmutablesTypeSerializationTest
     }
 
     @Test
-    public void testImmutablesMultipleTypeParametersRoundTrip() throws IOException {
+    public void testImmutablesMultipleTypeParametersRoundTrip() throws Exception {
         Entry<Key<Account>, Account> original = ImmutableEntry.<Key<Account>, Account>builder()
                 .key(ImmutableKey.<Account>builder()
                         .id(ImmutableAccount.builder()

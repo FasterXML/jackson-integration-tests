@@ -4,7 +4,11 @@ import com.fasterxml.jackson.jr.ob.JSON;
 import com.fasterxml.jackson.jr.ob.JSONObjectException;
 import com.fasterxml.jackson.jr.ob.JSON.Feature;
 
+import org.junit.jupiter.api.Test;
+
 import com.fasterxml.jackson.integtest.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JacksonJrBasicTest extends BaseTest
 {
@@ -41,31 +45,37 @@ public class JacksonJrBasicTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testByteArray() throws Exception {
         byte[] result = JSON.std.beanFrom(byte[].class, q("YWJj"));
         assertEquals("abc", new String(result, "UTF-8"));
     }
 
+    @Test
     public void testCharArray() throws Exception {
         char[] result = JSON.std.beanFrom(char[].class, q("abc"));
         assertEquals("abc", new String(result));
     }
 
+    @Test
     public void testSimpleArray() throws Exception
     {
         _testArray("[true,\"abc\",3]", 3);
     }
 
+    @Test
     public void testEmptyArray() throws Exception
     {
         _testArray("[]", 0);
     }
 
     // separate tests since code path differs
+    @Test
     public void testSingleElementArray() throws Exception {
         _testArray("[12]", 1);
     }
 
+    @Test
     public void testSmallArray() throws Exception {
         _testArray("[true,42,\"maybe\"]", 3);
     }
@@ -107,6 +117,7 @@ public class JacksonJrBasicTest extends BaseTest
     /**********************************************************************
      */
 
+    @Test
     public void testSimpleBean() throws Exception
     {
         final String INPUT = a2q("{'name':{'first':'Bob','last':'Burger'},'x':13}");
@@ -119,6 +130,7 @@ public class JacksonJrBasicTest extends BaseTest
         assertEquals("Burger", bean.name.last);
     }
 
+    @Test
     public void testUnknownProps() throws Exception
     {
         final String INPUT = a2q("{'first':'Bob','middle':'Eugene', 'last':'Smith'}");
