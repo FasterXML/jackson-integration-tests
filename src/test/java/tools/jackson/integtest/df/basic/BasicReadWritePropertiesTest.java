@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import tools.jackson.databind.ObjectMapper;
 
 import tools.jackson.integtest.BaseTest;
-import tools.jackson.integtest.BaseTest.PointXYZ;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
