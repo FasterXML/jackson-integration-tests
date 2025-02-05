@@ -13,6 +13,13 @@ import tools.jackson.databind.annotation.JsonSerialize;
 import tools.jackson.integtest.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
+// 04-Feb-2025, tatu: Immutables probably relies on Jackson 2.x
+//   in some form -- annotations from jackson-annotations are fine,
+//   but if some from jackson-databind used that'd be problematic
+//   At any rate, these tests just Do Not Work with Jackson 3 :-(
+//   Hence, commented out
 
 public class ImmutablesTypeSerializationTest
     extends BaseTest
@@ -50,6 +57,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesSimpleDeserialization() throws Exception {
+        checkIfEnabled();
+
         Account expected = ImmutableAccount.builder()
                 .id(1L)
                 .name("foo")
@@ -60,6 +69,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesSimpleRoundTrip() throws Exception {
+        checkIfEnabled();
+
         Account original = ImmutableAccount.builder()
                 .id(1L)
                 .name("foo")
@@ -71,6 +82,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesSimpleGenericDeserialization() throws Exception {
+        checkIfEnabled();
+
         Key<Account> expected = ImmutableKey.<Account>builder()
                 .id(ImmutableAccount.builder()
                         .id(1L)
@@ -85,6 +98,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesSimpleGenericRoundTrip() throws Exception {
+        checkIfEnabled();
+
         Key<Account> original = ImmutableKey.<Account>builder()
                 .id(ImmutableAccount.builder()
                         .id(1L)
@@ -98,6 +113,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesMultipleTypeParametersDeserialization() throws Exception {
+        checkIfEnabled();
+
         Entry<Key<Account>, Account> expected = ImmutableEntry.<Key<Account>, Account>builder()
                 .key(ImmutableKey.<Account>builder()
                         .id(ImmutableAccount.builder()
@@ -118,6 +135,8 @@ public class ImmutablesTypeSerializationTest
 
     @Test
     public void testImmutablesMultipleTypeParametersRoundTrip() throws Exception {
+        checkIfEnabled();
+
         Entry<Key<Account>, Account> original = ImmutableEntry.<Key<Account>, Account>builder()
                 .key(ImmutableKey.<Account>builder()
                         .id(ImmutableAccount.builder()
@@ -134,5 +153,9 @@ public class ImmutablesTypeSerializationTest
         Entry<Key<Account>, Account> deserialized = MAPPER.readValue(
                 json, new TypeReference<Entry<Key<Account>, Account>>() {});
         assertEquals(original, deserialized);
+    }
+
+    private void checkIfEnabled() {
+        assumeTrue(false, "Won't work with Jackson 3");
     }
 }
