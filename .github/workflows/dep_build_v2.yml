@@ -1,4 +1,4 @@
-name: Re-build on jackson-databind push
+name: Re-build on jackson-databind 2.x push
 on:
   repository_dispatch:
     types: [jackson-databind-pushed]
