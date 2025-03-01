@@ -16,7 +16,7 @@ dependencies {
     // implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0-SNAPSHOT"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:3.0.0-SNAPSHOT"))
     repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
