@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GradleTest
 {
     /**
-     * This test calls the Gradle build in 'src/test/resources/com/fasterxml/jackson/integtest/gradle' which:
+     * This test calls the Gradle build in 'src/test/resources/tools/jackson/integtest/gradle' which:
      * - Collects all entries from the latest Jackson BOM
      * - Checks the metadata of all the entries if they point back to the BOM
      * - If not, it fails which can mean one of the following:

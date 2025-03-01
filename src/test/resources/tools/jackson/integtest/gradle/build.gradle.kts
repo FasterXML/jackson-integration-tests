@@ -13,10 +13,10 @@ val modulesWithoutGradleMetadata = listOf(
 )
 
 dependencies {
-    // implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
+    // implementation(platform("tools.jackson:jackson-bom:+"))
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0-SNAPSHOT"))
+    implementation(platform("tools.jackson:jackson-bom:3.0.0-rc1-SNAPSHOT"))
     repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
@@ -68,7 +68,7 @@ tasks.register("checkMetadata") {
             val pomModule = pomAllModulesResolved[index]
 
             val pomDependencies = pomModule.dependencies.map { it.toString() }
-            val gmmDependencies = gmmModule.dependencies.filter { !it.requested.displayName.startsWith("com.fasterxml.jackson:jackson-bom:") }.map { it.toString() }
+            val gmmDependencies = gmmModule.dependencies.filter { !it.requested.displayName.startsWith("tools.jackson:jackson-bom:") }.map { it.toString() }
             if (pomDependencies != gmmDependencies) {
                 message += "Dependencies of ${pomModule.id} are wrong in Gradle Metadata:" +
                         "\n  POM:    ${pomDependencies.joinToString()}" +
