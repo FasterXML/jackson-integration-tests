@@ -13,12 +13,11 @@ val modulesWithoutGradleMetadata = listOf(
 )
 
 dependencies {
-    implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
+    // implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    // implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.1-SNAPSHOT"))
-    // repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
-    // repositories.mavenCentral()
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0-SNAPSHOT"))
+    repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
 repositories.mavenCentral()
@@ -41,6 +40,8 @@ tasks.register("checkMetadata") {
 
         // Create dependencies to all Modules references in the BOM
         val allModules = configurations.detachedConfiguration(*allJacksonModule.map { dependencies.create(it) }.toTypedArray())
+        val modulesWithGradleMetadata = allJacksonModule.filter { m -> modulesWithoutGradleMetadata.none { m.startsWith(it) } }
+
         // Tell Gradle to do the dependency resolution and return the result with dependency information
         val allModulesResolved = resolveJacksonModules(allModules)
 
@@ -72,9 +73,29 @@ tasks.register("checkMetadata") {
                 message += "Dependencies of ${pomModule.id} are wrong in Gradle Metadata:" +
                         "\n  POM:    ${pomDependencies.joinToString()}" +
                         "\n  Gradle: ${gmmDependencies.joinToString()}" +
-                        "\n"
+                        "\n\n"
             }
         }
+
+        val pomMetadataFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@pom") }.toTypedArray())
+        val gradleMetadataFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@module") }.toTypedArray())
+        val checksumFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@jar.md5") }.toTypedArray())
+
+        val pomsWithoutMarker = pomMetadataFiles.files.filter { !it.readText().contains("<!-- do_not_remove: published-with-gradle-metadata -->") }.map { it.name }
+        if (pomsWithoutMarker.isNotEmpty()) {
+            message += "POMs without Gradle Metadata marker:\n  - ${pomsWithoutMarker.joinToString("\n  - ")}\n\n"
+        }
+
+        val checksumsFromFile = checksumFiles.associate { it.name.substringBeforeLast("-") to it.readText() }
+        val checksumsFromMetadata = gradleMetadataFiles.associate { it.name.substringBeforeLast("-") to it.readText().lines().first {
+            it.contains("\"md5\"") }.substringAfterLast(": \"").replace("\"", "").padStart(32, '0')
+        }
+        val checksumsDiff = checksumsFromFile.filter { (k,v) -> checksumsFromMetadata[k] != v }
+        if (checksumsDiff.isNotEmpty()) {
+            message += "Checksums in Gradle Metadata are wrong:\n  - ${checksumsDiff.keys.joinToString("\n  - ")}\n\n"
+            throw RuntimeException(message)
+        }
+
         if (message.isNotEmpty()) {
             throw RuntimeException(message)
         }
