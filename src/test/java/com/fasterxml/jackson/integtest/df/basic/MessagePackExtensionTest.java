@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.failing;
+package com.fasterxml.jackson.integtest.df.basic;
 
 import org.junit.jupiter.api.Test;
 
