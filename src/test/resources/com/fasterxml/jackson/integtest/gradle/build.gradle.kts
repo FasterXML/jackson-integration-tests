@@ -87,7 +87,9 @@ tasks.register("checkMetadata") {
         }
 
         val checksumsFromFile = checksumFiles.associate { it.name.substringBeforeLast("-") to it.readText() }
-        val checksumsFromMetadata = gradleMetadataFiles.associate { it.name.substringBeforeLast("-") to it.readText().lines().first { it.contains("\"md5\"") }.substringAfterLast(": \"").replace("\"", "") }
+        val checksumsFromMetadata = gradleMetadataFiles.associate { it.name.substringBeforeLast("-") to it.readText().lines().first {
+            it.contains("\"md5\"") }.substringAfterLast(": \"").replace("\"", "").padStart(32, '0')
+        }
         val checksumsDiff = checksumsFromFile.filter { (k,v) -> checksumsFromMetadata[k] != v }
         if (checksumsDiff.isNotEmpty()) {
             message += "Checksums in Gradle Metadata are wrong:\n  - ${checksumsDiff.keys.joinToString("\n  - ")}\n\n"
