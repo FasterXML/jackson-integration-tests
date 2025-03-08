@@ -16,7 +16,7 @@ dependencies {
     // implementation(platform("tools.jackson:jackson-bom:+"))
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    implementation(platform("tools.jackson:jackson-bom:3.0.0-rc1-SNAPSHOT"))
+    implementation(platform("tools.jackson:jackson-bom:3.0.0-rc1"))
     repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
