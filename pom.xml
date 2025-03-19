@@ -25,6 +25,8 @@
     <scala.full.version>2.13.14</scala.full.version>
     <!-- 08-Jun-2024, tatu: Jackson 2.19 supports Kotlin 1.9 and above only -->
     <kotlin.version>2.0.21</kotlin.version>
+    <!-- 19-Mar-2025, tatu: Not 100% sure why we add this dep but... -->
+    <guava.version>33.4.0-jre</guava.version>
 
     <immutables.version>2.10.1</immutables.version>
 
@@ -138,7 +140,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>33.1.0-jre</version>
+      <version>${guava.version}</version>
     </dependency>
     
     <!-- Also most datatypes -->
