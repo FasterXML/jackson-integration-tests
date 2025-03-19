@@ -13,6 +13,7 @@ module tools.jackson.integtest
     opens tools.jackson.integtest.df.props;
     opens tools.jackson.integtest.df.xml;
     opens tools.jackson.integtest.dt.datetime;
+    opens tools.jackson.integtest.dt.eclipsecoll;
     opens tools.jackson.integtest.dt.guava;
     opens tools.jackson.integtest.dt.joda;
     opens tools.jackson.integtest.dt.jsonp;

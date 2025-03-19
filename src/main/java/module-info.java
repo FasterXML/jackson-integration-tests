@@ -24,12 +24,13 @@ module tools.jackson.integtest.base
     // Base modules
 
     // Data types 
+    requires transitive tools.jackson.datatype.eclipsecollections;
+    requires transitive tools.jackson.datatype.guava;
     requires transitive tools.jackson.datatype.joda;
     requires transitive tools.jackson.datatype.javatime;
     requires transitive tools.jackson.datatype.jsonp;
     // No more supported on 3.0
     //requires transitive tools.jackson.datatype.jsr353;
-    requires transitive tools.jackson.datatype.guava;
     
     // Other Jackson components
     requires transitive tools.jackson.jr.ob;
@@ -39,6 +40,8 @@ module tools.jackson.integtest.base
 
     // 3rd party
     requires transitive com.google.common;
+    requires transitive org.eclipse.collections.api;
+    requires transitive org.eclipse.collections.impl;
     requires transitive jakarta.json; // new JSONP
     requires transitive kotlin.stdlib;
     requires transitive org.immutables.value;
