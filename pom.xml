@@ -144,6 +144,10 @@
     <!-- Also most datatypes -->
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-eclipse-collections</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-guava</artifactId>
     </dependency>
     <dependency>
