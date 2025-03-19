@@ -7,7 +7,7 @@
     <artifactId>jackson-base</artifactId>
     <version>2.19.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.fasterxml.jackson.test</groupId>
+  <groupId>com.fasterxml.jackson.integtest</groupId>
   <artifactId>jackson-integration-tests</artifactId>
   <name>Jackson Integration Tests</name>
   <packaging>jar</packaging>
@@ -131,7 +131,8 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>19.0</version>
+      <!-- For Jackson 2.19, this minimum used -->
+      <version>25.1-jre</version>
     </dependency>
     
     <!-- Also most datatypes -->
