@@ -9,7 +9,11 @@ val modulesWithoutGradleMetadata = listOf(
         "com.fasterxml.jackson.module:jackson-module-scala_2.11", // built with sbt
         "com.fasterxml.jackson.module:jackson-module-scala_2.12", // built with sbt
         "com.fasterxml.jackson.module:jackson-module-scala_2.13", // built with sbt
-        "com.fasterxml.jackson.module:jackson-module-scala_3"     // built with sbt
+        "com.fasterxml.jackson.module:jackson-module-scala_3",     // built with sbt
+
+        // 3rd-party managed dependencies, by XML module:
+        "com.fasterxml.woodstox:woodstox-core",
+        "org.codehaus.woodstox:stax2-api" // for Woodstox
 )
 
 dependencies {
