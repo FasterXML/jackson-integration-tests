@@ -6,7 +6,7 @@
     <artifactId>jackson-base</artifactId>
     <version>3.0.0-rc2-SNAPSHOT</version>
   </parent>
-  <groupId>tools.jackson.test</groupId>
+  <groupId>tools.jackson.integtest</groupId>
   <artifactId>jackson-integration-tests</artifactId>
   <name>Jackson Integration Tests</name>
   <packaging>jar</packaging>
