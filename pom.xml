@@ -154,11 +154,15 @@
     </dependency>
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-joda</artifactId>
+      <artifactId>jackson-datatype-javax-money</artifactId>
     </dependency>
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>tools.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-joda</artifactId>
     </dependency>
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
@@ -174,6 +178,10 @@
       <artifactId>jackson-datatype-jdk8</artifactId>
     </dependency>
     -->
+    <dependency>
+      <groupId>tools.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-moneta</artifactId>
+    </dependency>
 
     <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
      -->

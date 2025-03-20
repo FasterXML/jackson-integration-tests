@@ -15,6 +15,7 @@ module tools.jackson.integtest
     opens tools.jackson.integtest.dt.datetime;
     opens tools.jackson.integtest.dt.eclipsecoll;
     opens tools.jackson.integtest.dt.guava;
+    opens tools.jackson.integtest.dt.javaxmoney;
     opens tools.jackson.integtest.dt.joda;
     opens tools.jackson.integtest.dt.jsonp;
     opens tools.jackson.integtest.gradle;
