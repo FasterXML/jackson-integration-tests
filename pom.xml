@@ -144,13 +144,25 @@
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-guava</artifactId>
     </dependency>
+    <dependency> <!-- 2.19 -->
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-javax-money</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-joda</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jakarta-jsonp</artifactId>
+      <artifactId>jackson-datatype-joda-money</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -164,9 +176,9 @@
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr353</artifactId>
     </dependency>
-    <dependency>
+    <dependency> <!-- 2.19, java money ref impl -->
       <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jdk8</artifactId>
+      <artifactId>jackson-datatype-moneta</artifactId>
     </dependency>
 
     <!-- JSONP/JSR-353 datatype modules will need actual JSON-P provider impls:
@@ -182,6 +194,14 @@
         <groupId>jakarta.json</groupId>
         <artifactId>jakarta.json-api</artifactId>
         <version>2.1.3</version>
+    </dependency>
+    <!-- For Javax.money, need Moneta Ref Impl -->
+    <dependency>
+        <groupId>org.javamoney</groupId>
+        <artifactId>moneta</artifactId>
+        <version>1.4.4</version>
+        <type>pom</type>
+        <scope>test</scope>
     </dependency>
 
     <!-- Some general modules -->
@@ -241,7 +261,6 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.0.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -333,7 +352,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M9</version>
             <configuration>
               <argLine>--add-opens java.base/java.time=ALL-UNNAMED</argLine>
             </configuration>
