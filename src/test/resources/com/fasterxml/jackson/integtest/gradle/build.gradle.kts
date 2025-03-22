@@ -26,6 +26,10 @@ dependencies {
 
 repositories.mavenCentral()
 
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor(0, "seconds") // always refresh SNAPSHOTs
+}
+
 // (miss-)use a component metadata rule to collect all entries from the BOM
 val allJacksonModule = mutableListOf<String>()
 dependencies.components.withModule("com.fasterxml.jackson:jackson-bom") {
