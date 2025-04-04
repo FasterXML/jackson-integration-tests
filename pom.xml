@@ -4,7 +4,7 @@
   <parent>
     <groupId>tools.jackson</groupId>
     <artifactId>jackson-base</artifactId>
-    <version>3.0.0-rc2-SNAPSHOT</version>
+    <version>3.0.0-rc3-SNAPSHOT</version>
   </parent>
   <groupId>tools.jackson.integtest</groupId>
   <artifactId>jackson-integration-tests</artifactId>
@@ -168,11 +168,11 @@
       <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-json-org</artifactId>
     </dependency>
+    <!-- Part of jackson-databind in 3.0:
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
-    <!-- Part of jackson-databind in 3.0: 
     <dependency>
       <groupId>tools.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jdk8</artifactId>

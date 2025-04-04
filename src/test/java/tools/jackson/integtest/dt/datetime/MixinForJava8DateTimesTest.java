@@ -18,12 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 // mix-ins for java.time.* should still work with Jackson 2.12.
 public class MixinForJava8DateTimesTest extends BaseTest
 {
-    @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
-    static class UnmodifiableCollectionMixin {
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        public UnmodifiableCollectionMixin(final Collection<?> collection) { }
-    }
-
     @JsonAutoDetect(
             fieldVisibility = JsonAutoDetect.Visibility.NONE,
             getterVisibility = JsonAutoDetect.Visibility.NONE,

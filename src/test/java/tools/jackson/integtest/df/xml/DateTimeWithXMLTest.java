@@ -13,7 +13,6 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
 
 import tools.jackson.datatype.joda.JodaModule;
-import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 import tools.jackson.integtest.BaseTest;
 
@@ -43,7 +42,6 @@ public class DateTimeWithXMLTest extends BaseTest
 
     private final ObjectMapper MAPPER = xmlMapperBuilder()
             .addModule(new JodaModule())
-            .addModule(new JavaTimeModule())
             .build();
 
     /*

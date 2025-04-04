@@ -28,7 +28,6 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.datatype.guava;
     requires transitive tools.jackson.datatype.joda;
     requires transitive tools.jackson.datatype.javax.money;
-    requires transitive tools.jackson.datatype.javatime;
     requires transitive tools.jackson.datatype.jsonp;
     // No more supported on 3.0
     //requires transitive tools.jackson.datatype.jsr353;

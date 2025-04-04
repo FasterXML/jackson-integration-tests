@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
-import tools.jackson.databind.exc.InvalidDefinitionException;
-
-import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 import tools.jackson.integtest.BaseTest;
 
@@ -33,34 +30,8 @@ public class Java8DateTimeTest extends BaseTest
     }
 
     final private ObjectMapper MAPPER = jsonMapperBuilder()
-            .addModule(new JavaTimeModule())
+            // Java Time module part of Jackson 3 databind
             .build();
-
-    /*
-    /**********************************************************************
-    /* Failing tests: attempts to use without module should fail (2.12+)
-    /**********************************************************************
-     */
-
-    @Test
-    public void testFailWithoutDateTimeModule() throws Exception
-    {
-        final ObjectMapper vanilla = jsonMapper();
-
-        try {
-            vanilla.writeValueAsString(ZonedDateTime.now());
-            fail("Should fail to serialize without Joda module");
-        } catch (InvalidDefinitionException e) {
-            verifyException(e, "Java 8 date/time type `java.time.ZonedDateTime` not supported by default");
-        }
-
-        try {
-            vanilla.readValue("{ }", ZonedDateTime.class);
-            fail("Should fail to deserialize without Joda module");
-        } catch (InvalidDefinitionException e) {
-            verifyException(e, "Java 8 date/time type `java.time.ZonedDateTime` not supported by default");
-        }
-    }
 
     /*
     /**********************************************************************
