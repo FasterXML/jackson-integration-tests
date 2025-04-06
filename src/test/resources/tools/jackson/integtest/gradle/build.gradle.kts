@@ -28,6 +28,12 @@ dependencies {
 
 repositories.mavenCentral()
 
+configurations.all {
+    // 23-Mar-2025: [#27] Reduce default snapshot TTL from 24h to none, to avoid
+    //    failing (or passing, for that matter) on stale snapshots
+    resolutionStrategy.cacheDynamicVersionsFor(0, "seconds") // always refresh SNAPSHOTs
+}
+
 // (miss-)use a component metadata rule to collect all entries from the BOM
 val allJacksonModule = mutableListOf<String>()
 dependencies.components.withModule("tools.jackson:jackson-bom") {
