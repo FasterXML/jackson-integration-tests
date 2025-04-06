@@ -3,11 +3,9 @@ on:
   push:
     branches:
     - 3.x
-    - "2.19"
   pull_request:
     branches:
     - 3.x
-    - "2.19"
   # Also run once per day anyway, at 10:00 UTC (18:00 PT)
   schedule:
     - cron: "0 10 * * *"
