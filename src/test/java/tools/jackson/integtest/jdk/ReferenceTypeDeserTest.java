@@ -23,13 +23,6 @@ public class ReferenceTypeDeserTest extends BaseTest
     private final static String JSON_FROM_ABSENT = a2q("{ }");
     private final static String JSON_FROM_NULL = a2q("{'value':null}");
 
-    private final static AtomicReference<?> ATOMIC_REFERENCE_EMPTY
-        = new AtomicReference<>();
-    private final static com.google.common.base.Optional<?> GUAVA_OPTIONAL_EMPTY
-        = com.google.common.base.Optional.absent();
-    private final static java.util.Optional<?> JDK_OPTIONAL_EMPTY
-        = java.util.Optional.empty();
-
     static abstract class RefFieldBean<T> {
         public T value;
 
