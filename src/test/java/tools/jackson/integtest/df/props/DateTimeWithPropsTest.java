@@ -12,7 +12,6 @@ import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import tools.jackson.databind.JavaType;
-import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.dataformat.javaprop.JavaPropsMapper;
 
