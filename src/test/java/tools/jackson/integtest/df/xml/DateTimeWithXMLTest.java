@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
-
+import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.datatype.joda.JodaModule;
 
 import tools.jackson.integtest.BaseTest;
@@ -55,7 +55,7 @@ public class DateTimeWithXMLTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         // trick: force a bogus attribute?
         doc = doc.replace("<cal", "<cal lang='en' ");
@@ -69,7 +69,7 @@ public class DateTimeWithXMLTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer()
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         // trick: force a bogus attribute?
         doc = doc.replace("<cal", "<cal lang='en' ");
@@ -101,7 +101,7 @@ public class DateTimeWithXMLTest extends BaseTest
     public void testJodaRootDateTimeTextual() throws Exception
     {
         String xml = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(TEST_JODA_DATETIME);
         // trick: force a bogus attribute?
         xml = xml.replace("<DateTime>", "<DateTime lang='en'>");
@@ -114,7 +114,7 @@ public class DateTimeWithXMLTest extends BaseTest
     public void testJodaRootDateTimeNumeric() throws Exception
     {
         String xml = MAPPER.writer()
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(TEST_JODA_DATETIME);
         // trick: force a bogus attribute?
         xml = xml.replace("<DateTime>", "<DateTime lang='en'>");
@@ -144,7 +144,7 @@ public class DateTimeWithXMLTest extends BaseTest
     public void testJava8RootDateTimeTextual() throws Exception
     {
         String xml = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(TEST_JAVA8_ZONEDDATETIME);
 
         // trick: force a bogus attribute?
@@ -158,7 +158,7 @@ public class DateTimeWithXMLTest extends BaseTest
     public void testJava8RootDateTimeNumeric() throws Exception
     {
         String xml = MAPPER.writer()
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(TEST_JAVA8_ZONEDDATETIME);
 
         // trick: force a bogus attribute?

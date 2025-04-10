@@ -6,8 +6,7 @@ import java.util.Locale;
 import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
 
-import tools.jackson.databind.SerializationFeature;
-
+import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.dataformat.csv.CsvMapper;
 import tools.jackson.dataformat.csv.CsvSchema;
 import tools.jackson.datatype.joda.JodaModule;
@@ -47,7 +46,7 @@ public class DateTimeWithCSVTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer(WRAPPER_SCHEMA_JDK_OLD)
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         CalendarWrapper result = MAPPER.readerFor(CalendarWrapper.class)
                 .with(WRAPPER_SCHEMA_JDK_OLD)
@@ -60,7 +59,7 @@ public class DateTimeWithCSVTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer(WRAPPER_SCHEMA_JDK_OLD)
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         CalendarWrapper result = null;
         try {
@@ -85,7 +84,7 @@ public class DateTimeWithCSVTest extends BaseTest
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
         String doc = MAPPER.writer(WRAPPER_SCHEMA_JODA)
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         DateTimeWrapper result = MAPPER.readerFor(DateTimeWrapper.class)
                 .with(WRAPPER_SCHEMA_JODA)
@@ -98,7 +97,7 @@ public class DateTimeWithCSVTest extends BaseTest
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
         String doc = MAPPER.writer(WRAPPER_SCHEMA_JODA)
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         DateTimeWrapper result = null;
         try {

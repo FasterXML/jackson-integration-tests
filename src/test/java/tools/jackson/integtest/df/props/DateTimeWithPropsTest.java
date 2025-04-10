@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.SerializationFeature;
-
+import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.dataformat.javaprop.JavaPropsMapper;
 
 import tools.jackson.datatype.joda.JodaModule;
@@ -58,7 +58,7 @@ public class DateTimeWithPropsTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         CalendarWrapper result = MAPPER.readerFor(CalendarWrapper.class)
                 .readValue(doc);
@@ -70,7 +70,7 @@ public class DateTimeWithPropsTest extends BaseTest
     {
         CalendarWrapper input = new CalendarWrapper(TEST_CALENDAR);
         String doc = MAPPER.writer()
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         CalendarWrapper result = MAPPER.readerFor(CalendarWrapper.class)
                 .readValue(doc);
@@ -88,7 +88,7 @@ public class DateTimeWithPropsTest extends BaseTest
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
         String doc = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         DateTimeWrapper result = MAPPER.readerFor(DateTimeWrapper.class)
                 .readValue(doc);
@@ -100,7 +100,7 @@ public class DateTimeWithPropsTest extends BaseTest
     {
         DateTimeWrapper input = new DateTimeWrapper(TEST_DATETIME);
         String doc = MAPPER.writer()
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .with(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(input);
         DateTimeWrapper result = null;
         try {

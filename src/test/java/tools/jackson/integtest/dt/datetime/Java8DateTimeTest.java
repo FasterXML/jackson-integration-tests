@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
-
+import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.integtest.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +53,7 @@ public class Java8DateTimeTest extends BaseTest
         ZonedDateTime date = ZonedDateTime.ofInstant(Instant.ofEpochSecond(0L), Z1);
         // with no explicit timezone specification, timezone we pass will be used so
         String value = MAPPER.writer()
-                .without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .without(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .writeValueAsString(date);
         assertEquals(q("1969-12-31T18:00:00-06:00"), value);
     }
