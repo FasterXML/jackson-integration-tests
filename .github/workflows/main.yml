@@ -1,13 +1,9 @@
 name: Build and Run Tests
 on:
   push:
-    branches:
-    - 3.x
-    - "2.19"
+    branches: [2.*]
   pull_request:
-    branches:
-    - 3.x
-    - "2.19"
+    branches: [2.*]
   # Also run once per day anyway, at 10:00 UTC (18:00 PT)
   schedule:
     - cron: "0 10 * * *"
@@ -16,12 +12,11 @@ permissions:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: 'ubuntu-24.04'
     strategy:
       fail-fast: false
       matrix:
-        java_version: ['8', '11', '17']
-        os: ['ubuntu-22.04']
+        java_version: ['8', '11', '17', '21']
     env:
       JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
     steps:
