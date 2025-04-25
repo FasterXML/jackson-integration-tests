@@ -1,11 +1,9 @@
 name: Build and Run Tests
 on:
   push:
-    branches:
-    - 3.x
+    branches: [3.*]
   pull_request:
-    branches:
-    - 3.x
+    branches: [3.*]
   # Also run once per day anyway, at 10:00 UTC (18:00 PT)
   schedule:
     - cron: "0 10 * * *"
@@ -14,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
     strategy:
       fail-fast: false
       matrix:
