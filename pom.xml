@@ -234,18 +234,19 @@
 
   </dependencies>
 
-  <!-- Need both Snapshot repos: new (most, anything under "tools.jackson")
+  <!-- Need multiple Snapshot repos: new (most, anything under "tools.jackson")
        and old (for "com.fasterxml", mostly jackson-annotations)
     -->
   <repositories>
+    <!-- 22-May-2025, tatu: tools.jackson from Central Portal -->
     <repository>
-      <id>sonatype-nexus-snapshots-new</id>
-      <name>Sonatype Nexus Snapshots (new)</name>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      <id>central-snapshots</id>
+      <name>Sonatype Central Portal (snapshots)</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots</url>
       <releases><enabled>false</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
     </repository>
-    <!-- and old repo for jackson-annotations -->
+    <!-- and old OSSRH repo for jackson-annotations (until June 2025) -->
     <repository>
       <id>sonatype-nexus-snapshots-old</id>
       <name>Sonatype Nexus Snapshots (old)</name>
