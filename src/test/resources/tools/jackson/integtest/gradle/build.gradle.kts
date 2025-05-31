@@ -21,11 +21,8 @@ dependencies {
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
     implementation(platform("tools.jackson:jackson-bom:3.0.0-rc6-SNAPSHOT"))
-    // Need both new Snapshot repo (almost everything) and "old" (for jackson-annotations)
+    // Need just new Snapshot repo (everything)
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
-    // No longer used for "tools.jackson":
-    //repositories.maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
-    repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
 repositories.mavenCentral()
