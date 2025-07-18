@@ -31,7 +31,7 @@
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
 
-    <jackson.version.module.scala>2.19.0-SNAPSHOT</jackson.version.module.scala>
+    <jackson.version.module.scala>2.20.0-SNAPSHOT</jackson.version.module.scala>
       -->
   </properties>
 
