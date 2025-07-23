@@ -11,6 +11,7 @@ import tools.jackson.databind.JacksonModule;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.datatype.eclipsecollections.EclipseCollectionsModule;
 import tools.jackson.datatype.guava.GuavaModule;
+import tools.jackson.datatype.javax.money.JavaxMoneyModule;
 import tools.jackson.datatype.joda.JodaModule;
 import tools.jackson.datatype.jsonp.JSONPModule;
 import tools.jackson.integtest.BaseTest;
