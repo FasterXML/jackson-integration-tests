@@ -22,5 +22,6 @@ module tools.jackson.integtest
     opens tools.jackson.integtest.immutables;
     opens tools.jackson.integtest.jacksonjr;
     opens tools.jackson.integtest.jdk;
+    opens tools.jackson.integtest.spi;
     opens tools.jackson.integtest.testutil;
 }

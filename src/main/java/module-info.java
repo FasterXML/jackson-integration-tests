@@ -37,6 +37,7 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.jr.ob;
     requires transitive tools.jackson.jr.stree;
     requires transitive tools.jackson.module.afterburner;
+    requires transitive tools.jackson.module.blackbird;
     requires transitive tools.jackson.module.kotlin;
 
     // 3rd party

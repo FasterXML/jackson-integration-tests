@@ -6,7 +6,6 @@ val modulesWithoutGradleMetadata = listOf(
         "tools.jackson.jr:jackson-jr-all", // TODO is there a reason not to add this?
 
         "tools.jackson:jackson-bom", // does not need it
-        "tools.jackson.module:jackson-module-scala_2.11", // built with sbt
         "tools.jackson.module:jackson-module-scala_2.12", // built with sbt
         "tools.jackson.module:jackson-module-scala_2.13", // built with sbt
         "tools.jackson.module:jackson-module-scala_3",     // built with sbt
