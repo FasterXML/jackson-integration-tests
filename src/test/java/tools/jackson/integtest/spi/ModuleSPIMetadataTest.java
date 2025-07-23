@@ -24,18 +24,18 @@ public class ModuleSPIMetadataTest extends BaseTest
 {
     private final List<Class<? extends JacksonModule>> modules = Arrays.asList(
             // General-purpose:
-                    AfterburnerModule.class,
-                    BlackbirdModule.class,
+            AfterburnerModule.class,
+            BlackbirdModule.class,
 
-                    // Collection data types:
-                    EclipseCollectionsModule.class,
-                    GuavaModule.class,
+            // Collection data types:
+            EclipseCollectionsModule.class,
+            GuavaModule.class,
 
-                    // Other data types:
-                    JavaxMoneyModule.class,
-                    JodaModule.class,
-                    JSONPModule.class
-            );
+            // Other data types:
+            JavaxMoneyModule.class,
+            JodaModule.class,
+            JSONPModule.class
+    );
 
     @Test
     public void testFindModules()

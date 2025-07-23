@@ -30,7 +30,10 @@
 
     <immutables.version>2.10.1</immutables.version>
 
+<!--
     <version.junit5>5.13.4</version.junit5>
+    -->
+    <version.junit5>6.0.0-M1</version.junit5>
 
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
