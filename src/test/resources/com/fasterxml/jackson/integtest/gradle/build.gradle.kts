@@ -21,7 +21,7 @@ dependencies {
 
     // 18-Jul-2025, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.21.0-SNAPSHOT"))
-    repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
+    repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
 }
 
 repositories.mavenCentral()
