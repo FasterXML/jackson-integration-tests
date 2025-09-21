@@ -5,6 +5,8 @@ plugins {
 val modulesWithoutGradleMetadata = listOf(
         "com.fasterxml.jackson.jr:jackson-jr-all", // TODO is there a reason not to add this?
 
+        "com.fasterxml.jackson.core:jackson-annotations", // due to 2.x/3.x co-constraints
+
         "com.fasterxml.jackson:jackson-bom", // does not need it
         "com.fasterxml.jackson.module:jackson-module-scala_2.11", // built with sbt
         "com.fasterxml.jackson.module:jackson-module-scala_2.12", // built with sbt
