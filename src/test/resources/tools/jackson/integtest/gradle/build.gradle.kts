@@ -16,10 +16,10 @@ val modulesWithoutGradleMetadata = listOf(
 )
 
 dependencies {
-    //implementation(platform("tools.jackson:jackson-bom:+"))
+    implementation(platform("tools.jackson:jackson-bom:+"))
 
     // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    implementation(platform("tools.jackson:jackson-bom:3.0.0-SNAPSHOT"))
+    //implementation(platform("tools.jackson:jackson-bom:3.0.1-SNAPSHOT"))
     // Need just new Snapshot repo (everything)
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
 }
