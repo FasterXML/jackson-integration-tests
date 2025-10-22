@@ -4,7 +4,7 @@
   <parent>
     <groupId>tools.jackson</groupId>
     <artifactId>jackson-base</artifactId>
-    <version>3.0.1</version>
+    <version>3.1.0-SNAPSHOT</version>
   </parent>
   <groupId>tools.jackson.integtest</groupId>
   <artifactId>jackson-integration-tests</artifactId>
@@ -37,7 +37,7 @@
 
     <!-- 13-Oct-2020, tatu: may need to occasionally work around missing Scala
             module snapshot version
-    <jackson.version.module.scala>3.0.0-SNAPSHOT</jackson.version.module.scala>
+    <jackson.version.module.scala>3.1.0-SNAPSHOT</jackson.version.module.scala>
     -->
   </properties>
 
