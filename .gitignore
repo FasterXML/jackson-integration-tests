@@ -20,7 +20,7 @@ syntax: glob
 *.iml
 *.ipr
 *.iws
-/.idea/
+.idea/
 /.apt_generated/
 /.apt_generated_tests/
 
