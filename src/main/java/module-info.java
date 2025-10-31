@@ -41,7 +41,7 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.module.kotlin;
 
     // 31-Oct-2025, tatu: Broken module def due to shading in 3.0?
-    // requires transitive tools.jackson.module.mrbean;
+    requires transitive tools.jackson.module.mrbean;
 
     // 3rd party
     requires transitive com.google.common;
