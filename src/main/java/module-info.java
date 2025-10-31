@@ -39,6 +39,7 @@ module tools.jackson.integtest.base
     requires transitive tools.jackson.module.afterburner;
     requires transitive tools.jackson.module.blackbird;
     requires transitive tools.jackson.module.kotlin;
+//    requires transitive tools.jackson.module.mrbean;
 
     // 3rd party
     requires transitive com.google.common;

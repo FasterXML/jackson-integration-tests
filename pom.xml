@@ -208,6 +208,10 @@
       <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-blackbird</artifactId>
     </dependency>
+    <dependency>
+      <groupId>tools.jackson.module</groupId>
+      <artifactId>jackson-module-mrbean</artifactId>
+    </dependency>
 
     <!-- 04-Jun-2020, tatu: And why not Protobuf value type support too? -->
     <dependency>

@@ -10,15 +10,20 @@ val modulesWithoutGradleMetadata = listOf(
         "tools.jackson.module:jackson-module-scala_2.13", // built with sbt
         "tools.jackson.module:jackson-module-scala_3",     // built with sbt
 
+        // 31-Oct-2025, tatu: does not depend on jackson-bom; 2.20 naming convention different
+        "com.fasterxml.jackson.core:jackson-annotations",
+
         // 3rd-party managed dependencies, by XML module:
         "com.fasterxml.woodstox:woodstox-core",
         "org.codehaus.woodstox:stax2-api" // for Woodstox
 )
 
 dependencies {
-    implementation(platform("tools.jackson:jackson-bom:+"))
+    // 18-Jul-2025, tatu: Choose one or the other of these (regular vs SNAPSHOT)
+    //                                                  | 
+    //                                                  V
 
-    // 28-Apr-2023, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
+    implementation(platform("tools.jackson:jackson-bom:+"))
     //implementation(platform("tools.jackson:jackson-bom:3.0.1-SNAPSHOT"))
     // Need just new Snapshot repo (everything)
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
