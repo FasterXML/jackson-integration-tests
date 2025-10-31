@@ -5,6 +5,9 @@ plugins {
 val modulesWithoutGradleMetadata = listOf(
         "com.fasterxml.jackson.jr:jackson-jr-all", // TODO is there a reason not to add this?
 
+        // 31-Oct-2025, tatu: does not depend on jackson-bom; 2.20 naming convention different
+        "com.fasterxml.jackson.core:jackson-annotations",
+
         "com.fasterxml.jackson:jackson-bom", // does not need it
         "com.fasterxml.jackson.module:jackson-module-scala_2.11", // built with sbt
         "com.fasterxml.jackson.module:jackson-module-scala_2.12", // built with sbt
@@ -17,10 +20,10 @@ val modulesWithoutGradleMetadata = listOf(
 )
 
 dependencies {
-    //implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
 
     // 18-Jul-2025, tatu: Uncomment following (and comment ^^^) to test SNAPSHOT versions
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.20.0-SNAPSHOT"))
+    //implementation(platform("com.fasterxml.jackson:jackson-bom:2.20.2-SNAPSHOT"))
     repositories.maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
