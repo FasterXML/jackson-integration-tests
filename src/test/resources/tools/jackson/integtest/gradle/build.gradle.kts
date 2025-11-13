@@ -10,7 +10,8 @@ val modulesWithoutGradleMetadata = listOf(
         "tools.jackson.module:jackson-module-scala_2.13", // built with sbt
         "tools.jackson.module:jackson-module-scala_3",     // built with sbt
 
-        // 31-Oct-2025, tatu: does not depend on jackson-bom; 2.20 naming convention different
+        // 31-Oct-2025, tatu: does not depend on jackson-bom; 2.x group id
+	//    and naming convention different
         "com.fasterxml.jackson.core:jackson-annotations",
 
         // 3rd-party managed dependencies, by XML module:
@@ -23,7 +24,7 @@ dependencies {
     //                                                  |
     //                                                  V
 
-    // implementation(platform("tools.jackson:jackson-bom:+"))
+    // implementation(platform("tools.jackson:jackson-bom:3.1.0"))
     implementation(platform("tools.jackson:jackson-bom:3.1.0-SNAPSHOT"))
 
     // Need just new Snapshot repo (everything)
