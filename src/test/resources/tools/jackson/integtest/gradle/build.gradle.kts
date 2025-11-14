@@ -23,7 +23,7 @@ dependencies {
     //                                                  | 
     //                                                  V
 
-    implementation(platform("tools.jackson:jackson-bom:3.0.2"))
+    implementation(platform("tools.jackson:jackson-bom:3.0.+"))
     //implementation(platform("tools.jackson:jackson-bom:3.0.3-SNAPSHOT"))
     // Need just new Snapshot repo (everything)
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
