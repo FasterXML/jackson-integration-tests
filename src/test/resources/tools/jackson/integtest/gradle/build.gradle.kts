@@ -56,7 +56,7 @@ tasks.register("checkMetadata") {
         configurations.compileClasspath.get().resolve() // triggers the rule above
 
         // Create dependencies to all Modules references in the BOM
-        val allModules = configurations.detachedConfiguration(*allJacksonModule.map { dependencies.create(it) }.toTypedArray())
+        val allModules = resolver(allJacksonModule)
         val modulesWithGradleMetadata = allJacksonModule.filter { m -> modulesWithoutGradleMetadata.none { m.startsWith(it) } }
 
         // Tell Gradle to do the dependency resolution and return the result with dependency information
@@ -79,7 +79,7 @@ tasks.register("checkMetadata") {
                 ignoreGradleMetadataRedirection()
             }
         }
-        val pomAllModules = configurations.detachedConfiguration(*allJacksonModule.map { dependencies.create(it) }.toTypedArray())
+        val pomAllModules = resolver(allJacksonModule)
         val pomAllModulesResolved = resolveJacksonModules(pomAllModules)
         allModulesResolved.forEachIndexed { index, gmmModule ->
             val pomModule = pomAllModulesResolved[index]
@@ -94,9 +94,9 @@ tasks.register("checkMetadata") {
             }
         }
 
-        val pomMetadataFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@pom") }.toTypedArray())
-        val gradleMetadataFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@module") }.toTypedArray())
-        val checksumFiles = configurations.detachedConfiguration(*modulesWithGradleMetadata.map { dependencies.create("$it@jar.md5") }.toTypedArray())
+        val pomMetadataFiles = resolver(modulesWithGradleMetadata.map { "$it@pom" })
+        val gradleMetadataFiles = resolver(modulesWithGradleMetadata.map { "$it@module" })
+        val checksumFiles = resolver(modulesWithGradleMetadata.map { "$it@jar.md5" })
 
         val pomsWithoutMarker = pomMetadataFiles.files.filter { !it.readText().contains("<!-- do_not_remove: published-with-gradle-metadata -->") }.map { it.name }
         if (pomsWithoutMarker.isNotEmpty()) {
@@ -123,3 +123,8 @@ fun resolveJacksonModules(allModules: Configuration) =
     allModules.incoming.resolutionResult.allComponents.filter {
         it.moduleVersion!!.group.startsWith("tools.jackson") && !modulesWithoutGradleMetadata.contains(it.moduleVersion!!.module.toString())
     }
+
+fun resolver(deps: List<String>) = configurations.detachedConfiguration(
+    *deps.map { dependencies.create(it) }.toTypedArray()).also {
+        it.resolutionStrategy.cacheChangingModulesFor(0, "seconds") }
+
