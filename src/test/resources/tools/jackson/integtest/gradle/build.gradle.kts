@@ -24,7 +24,7 @@ dependencies {
     //                                                  |
     //                                                  V
 
-    // implementation(platform("tools.jackson:jackson-bom:3.1.0"))
+    // implementation(platform("tools.jackson:jackson-bom:3.1.+"))
     implementation(platform("tools.jackson:jackson-bom:3.1.0-SNAPSHOT"))
 
     // Need just new Snapshot repo (everything)
