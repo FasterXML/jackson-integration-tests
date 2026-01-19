@@ -21,10 +21,10 @@ val modulesWithoutGradleMetadata = listOf(
 
 dependencies {
     // 18-Jul-2025, tatu: Choose one or the other of these (regular vs SNAPSHOT)
-    //                                                  | 
+    //                                                  |
     //                                                  V
 
-    //implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
+    // implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
 
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.22.0-SNAPSHOT"))
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
