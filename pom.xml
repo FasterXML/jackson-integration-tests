@@ -4,7 +4,7 @@
   <parent>
     <groupId>tools.jackson</groupId>
     <artifactId>jackson-base</artifactId>
-    <version>3.1.1</version>
+    <version>3.1.3</version>
   </parent>
   <groupId>tools.jackson.integtest</groupId>
   <artifactId>jackson-integration-tests</artifactId>
