@@ -26,7 +26,7 @@ dependencies {
 
     // implementation(platform("com.fasterxml.jackson:jackson-bom:+"))
 
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.22.0-SNAPSHOT"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.23.0-SNAPSHOT"))
     repositories.maven("https://central.sonatype.com/repository/maven-snapshots");
 }
 
