@@ -1,4 +1,7 @@
 // Module-info for integration tests, non-test
+// Some 3rd party deps (Guava, Eclipse Collections, Immutables, Joda) are automatic modules
+// but test module relies on transitive requires, so suppress warnings for those
+@SuppressWarnings("requires-transitive-automatic")
 module tools.jackson.integtest.base
 {
     // JDK deps
