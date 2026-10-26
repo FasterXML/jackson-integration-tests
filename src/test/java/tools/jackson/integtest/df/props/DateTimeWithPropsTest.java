@@ -142,7 +142,8 @@ public class DateTimeWithPropsTest extends BaseTest
 
     @Test
     public void testJodaLocalTimeNumeric() throws Exception {
-        _testJodaMiscNumeric(LocalTime.class, new LocalTime(TEST_TIMESTAMP));
+        // 26-Oct-2026: As with LocalDateTime, need to force use of UTC (as of 3.3)
+        _testJodaMiscNumeric(LocalTime.class, new LocalTime(TEST_TIMESTAMP, DateTimeZone.UTC));
     }
 
     private <T> void _testJodaMiscNumeric(Class<T> type, T instance) throws Exception
