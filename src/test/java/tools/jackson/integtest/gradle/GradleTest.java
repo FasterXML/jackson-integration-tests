@@ -41,7 +41,7 @@ public class GradleTest
         URL resource = getClass().getResource(fileName);
         assertNotNull(resource, "Null resource '"+fileName+"', from `"+getClass()+"`");
         String gradlew = resource.getFile();
-        Runtime.getRuntime().exec("chmod a+x " + gradlew).waitFor();
+        new File(gradlew).setExecutable(true, false);
         ProcessBuilder bp = new ProcessBuilder(gradlew, task, "-q",
                 "--project-dir", testFolder.getAbsolutePath());
         bp.redirectErrorStream(true);
