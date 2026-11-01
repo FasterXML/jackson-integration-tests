@@ -27,7 +27,7 @@
     <!-- 16-Jun-2026, tatu: Jackson 3.3. supports 2.2.x and above -->
     <kotlin.version>2.2.21</kotlin.version>
     <!-- 19-Mar-2025, tatu: Not 100% sure why we add this dep but... -->
-    <guava.version>33.4.0-jre</guava.version>
+    <guava.version>33.7.1-jre</guava.version>
 
     <immutables.version>2.10.1</immutables.version>
 
