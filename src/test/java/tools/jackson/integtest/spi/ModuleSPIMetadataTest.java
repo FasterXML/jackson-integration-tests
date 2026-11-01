@@ -49,7 +49,9 @@ public class ModuleSPIMetadataTest extends BaseTest
             Iterator<JacksonModule> it = modulesFound.iterator();
             while (it.hasNext()) {
                 JacksonModule nextFound = it.next();
-                if (nextFound.getClass().equals(module)) {
+                // Accept sub-classes: SPI provider need not be the public Module class
+                // (Blackbird 3.3 registers internal sub-class of `BlackbirdModule`)
+                if (module.isInstance(nextFound)) {
                     it.remove();
                     continue main_loop;
                 }
