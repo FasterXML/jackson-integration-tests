@@ -130,7 +130,7 @@ public class DateTimeWithPropsTest extends BaseTest
 
     @Test
     public void testJodaLocalDateNumeric() throws Exception {
-        _testJodaMiscNumeric(LocalDate.class, new LocalDate(TEST_TIMESTAMP));
+        _testJodaMiscNumeric(LocalDate.class, new LocalDate(TEST_TIMESTAMP, DateTimeZone.UTC));
     }
 
     @Test
