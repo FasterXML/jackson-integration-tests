@@ -62,9 +62,31 @@ tasks.register("checkMetadata") {
         // Tell Gradle to do the dependency resolution and return the result with dependency information
         val allModulesResolved = resolveJacksonModules(allModules)
 
+        // Fail fast (with a readable message) if anything could not be resolved: typically
+        // means some module(s) referenced by the BOM have not been published (yet), for
+        // example SNAPSHOT versions right after a release. Remaining checks need full resolution.
+        // (modules listed in 'modulesWithoutGradleMetadata' are not verified, so may be missing)
+        val unresolved = allModules.incoming.resolutionResult.allDependencies
+            .filterIsInstance<UnresolvedDependencyResult>()
+            .filter { dep -> modulesWithoutGradleMetadata.none { dep.attempted.displayName.startsWith("$it:") } }
+            .groupBy { it.attempted.displayName }
+            .toSortedMap()
+            .map { (missing, deps) ->
+                val reason = deps.first().failure.message?.lineSequence()?.first() ?: deps.first().failure.toString()
+                val requiredBy = deps.map { it.from }
+                    .filter { it.id !is ProjectComponentIdentifier } // skip this (test) project itself
+                    .map { it.moduleVersion?.toString() ?: it.id.displayName }
+                    .distinct().sorted()
+                "$missing: $reason" + requiredBy.joinToString("") { "\n      required by $it" }
+            }
+        if (unresolved.isNotEmpty()) {
+            throw RuntimeException("Could not resolve ${unresolved.size} module(s) referenced via the BOM" +
+                    " (not published yet?):\n  - ${unresolved.joinToString("\n  - ")}\n")
+        }
+
         val allModulesWithoutBomDependency = mutableListOf<String>()
         allModulesResolved.forEach { component ->
-            if (component.dependencies.map { it as ResolvedDependencyResult }.none { it.selected.moduleVersion!!.name == "jackson-bom" }) {
+            if (component.dependencies.filterIsInstance<ResolvedDependencyResult>().none { it.selected.moduleVersion!!.name == "jackson-bom" }) {
                 allModulesWithoutBomDependency.add(component.moduleVersion.toString())
             }
         }
